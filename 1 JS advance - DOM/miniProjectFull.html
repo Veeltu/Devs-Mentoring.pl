@@ -1,0 +1,190 @@
+<!-- // “””Develop the following application, use the following HTML elements to get started with. 
+    You will get the same code on starter folder. Apply all the styles and functionality using JavaScript only.
+
+// The year color is changing every 1 second
+// The date and time background color is changing every on seconds
+// Completed challenge has background green
+// Ongoing challenge has background yellow
+// Coming challenges have background red”””
+
+// index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript for Everyone:DOM</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-decoration: none;
+        }
+        span{
+            font-size : 40px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 800;
+            display: inline-block;
+        }
+        body{
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h1{
+            display: inline-block;
+            padding-right: 10px;
+        }
+        h2{
+            margin: 40px;
+            text-align: center;
+        }
+        ul{
+            margin: 40px;
+        }
+        li{
+            padding: 10px;
+            margin: 5px;
+        }
+        .dateDiv{
+            margin: auto;         
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+            </style>
+
+  </head>
+  <body>
+    <div class="wrapper">
+        <h1>Asabeneh Yetayeh challenges in 2020</h1>
+        <h2>30DaysOfJavaScript Challenge</h2>
+        <ul>
+            <li id="done">30DaysOfPython Challenge Done</li>
+            <li id="ongoing">30DaysOfJavaScript Challenge Ongoing</li>
+            <li id="coming">30DaysOfReact Challenge Coming</li>
+            <li id="coming">30DaysOfFullStack Challenge Coming</li>
+            <li id="coming">30DaysOfDataAnalysis Challenge Coming</li>
+            <li id="coming">30DaysOfReactNative Challenge Coming</li>
+            <li id="coming">30DaysOfMachineLearning Challenge Coming</li>
+        </ul>
+    </div>
+    <script>
+        
+// The year color is changing every 1 second    -----------------------------------------------------------------
+    // zmienne
+        const yearFull = document.querySelector('h1')
+        const textH2 = document.querySelector('h2')
+    // nowy element 'span' z '2020'        
+        const year = document.createElement('span');
+        year.innerHTML = yearFull.innerText
+        .split(' ')
+        .slice(4, 5);
+    // year = '2020'; następnym elementem po h1 (w style add display: inline-block, by były obok siebie z h1)
+        yearFull.after(year);
+    // usunięcie daty 2020 z yearFull i zamiana separatorów ',' na ' ', po manipulacjach
+        yearFull.innerHTML = yearFull.innerText
+        .split(' ')
+        .splice(0,4)
+    // w/w metoda powoduje taki zapis 'abc,de,fgh,ijk',potrzebna zamiana separatorów
+        .join(',')
+        .replace(/,/g,' ')
+        .split();
+    // funkcja losowy numer potrzebny do generowania kolorów
+        function randomNumber(min,max){
+            return Math.floor(Math.random() * (max - min) + min);
+            }
+    // funkcja zmieniająca kolory
+        function changeColor(element){
+            element.style.color = 'rgb('+randomNumber(0,255)+','+randomNumber(0,255)+','+randomNumber(0,255)+')'; 
+            };
+    // cast funkcji co sekunde
+        setInterval(function() {changeColor(year)},1000);
+
+// The date and time background color is changing every on seconds  -----------------------------------------------------------------
+    //tworzenie elementu w html dla daty, określenie gdzie ma być w html
+        let div = document.createElement('div');
+        textH2.after(div);
+    // funkcja która castuje zawartość co sek, by czas był uaktualniany co sek
+    function currentTime(){
+        const date = new Date();
+    // tworzenie formatu wyświetlanej daty
+        let dateHour = date.getHours();
+        let dateMinutes = date.getMinutes();
+        let dateSecunds = date.getSeconds();
+        let dateYear = date.getFullYear();
+        let dateMonth = date.getMonth();
+        let dateDay = date.getDay();
+        let dateMonthText = '';
+    // funkcja zmianiająca liczbę z getMonth na string z nazwą miesiąca
+        function nameMonth() {
+            switch(dateMonth) {
+                case 0: dateMonthText = 'January';
+                    break;
+                case 1: dateMonthText = 'February';
+                    break;
+                case 2: dateMonthText = 'March';
+                    break;
+                case 3: dateMonthText = 'April';
+                    break;
+                case 4: dateMonthText = 'May';
+                    break;
+                case 5: dateMonthText = 'June';
+                    break;
+                case 6: dateMonthText = 'July';
+                    break;
+                case 7: dateMonthText = 'August';
+                    break;
+                case 8: dateMonthText = 'September';
+                    break;
+                case 9: dateMonthText = 'October';
+                    break;
+                case 10: dateMonthText = 'November';
+                    break;
+                case 11: dateMonthText = 'December';
+                    break;
+            }
+        }
+    // wywołanie funkcji i określenie ostatecznego formatu daty
+        nameMonth();
+        dateFormat = `${dateMonthText} ${dateDay},${dateYear} ${dateHour}:${dateMinutes}:${dateSecunds}`;
+    // dodanie daty do elementu, dodanie classy dla elementu do css-a
+        div.innerHTML = dateFormat;
+        div.classList.add('dateDiv');
+    // funkcja zmieniająca kolory   
+        function changeBackgroundColor(element){
+                element.style.backgroundColor = 'rgb('+randomNumber(0,255)+','+randomNumber(0,255)+','+randomNumber(0,255)+')';
+            };
+    // cast funkcji co sekunde
+        setInterval(function() {changeBackgroundColor(div)},1000);
+        }
+        setInterval(function() {currentTime()},1000);
+// Completed challenge has background green
+// Ongoing challenge has background yellow
+// Coming challenges have background red”””     -----------------------------------------------------------------
+    // zmienne
+        const lista = document.querySelectorAll('li'); // targetuje 7 elementów li
+    // funkcja zmieniająca kolor tła w zależnośi od zawartości stringa
+        function backgroundColor(line){
+            if (line.innerHTML.includes('Done')) {
+                line.style.backgroundColor = "green";
+            } else if (line.innerHTML.includes('Ongoing')) {
+                line.style.backgroundColor = "yellow";
+            } else if (line.innerHTML.includes('Coming')) {
+                line.style.backgroundColor = "red";
+            }
+        }
+    // wywołanie funkcji dla każdego elementu z listy zmiennej 'lista'
+       lista.forEach(element => {
+            backgroundColor(element);
+       });
+    </script>
+  </body>
+</html>
