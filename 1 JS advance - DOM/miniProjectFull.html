@@ -82,21 +82,21 @@
     // zmienne
         const yearFull = document.querySelector('h1')
         const textH2 = document.querySelector('h2')
-    // nowy element 'span' z '2020'        
+    // nowy element 'span' z '2020' "wyciągniętym z html"
         const year = document.createElement('span');
-        year.innerHTML = yearFull.innerText
+        year.innerHTML = yearFull.innerText     //z 
         .split(' ')
         .slice(4, 5);
     // year = '2020'; następnym elementem po h1 (w style add display: inline-block, by były obok siebie z h1)
         yearFull.after(year);
-    // usunięcie daty 2020 z yearFull i zamiana separatorów ',' na ' ', po manipulacjach
-        yearFull.innerHTML = yearFull.innerText
-        .split(' ')
-        .splice(0,4)
+
+    // usunięcie daty 2020 z yearFull
+        yearFull.innerHTML = yearFull.innerText // 'wyciągam' z html-a sam text
+        .split(' ')                 //tworze Array tam gdzie (' ')
+        .splice(0,4)                //usówam '2020' ze stringa, dokładnie to zostawiam z tablicy elementy od 0 do 4
     // w/w metoda powoduje taki zapis 'abc,de,fgh,ijk',potrzebna zamiana separatorów
-        .join(',')
-        .replace(/,/g,' ')
-        .split();
+        .join(' ')                  //tworze stringa łącząc elemnty z Array za pomocą (' ')- spacji
+
     // funkcja losowy numer potrzebny do generowania kolorów
         function randomNumber(min,max){
             return Math.floor(Math.random() * (max - min) + min);
