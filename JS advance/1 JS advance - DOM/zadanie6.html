@@ -1,0 +1,56 @@
+<!-- Challenge 6
+Stwórz program, który będzie po kliknięciu przycisku Change losował dowolny kolor RGB i na
+podstawie wylosowanej wartości, zmieniał tło strony.  
+-->
+
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript for Everyone:DOM</title>
+    <style>
+        .change{
+            background-color: aliceblue;
+            width: 200px;
+            height: 50px;
+            cursor: pointer;
+        }
+    </style>
+  </head>
+  <body>
+    <button class="change">Change</button>
+    <div class="wrapper">
+        <h1>Asabeneh Yetayeh challenges in 2020</h1>
+        <h2>30DaysOfJavaScript Challenge</h2>
+        <ul>
+            <li>30DaysOfPython Challenge Done</li>
+            <li>30DaysOfJavaScript Challenge Ongoing</li>
+            <li>30DaysOfReact Challenge Coming</li>
+            <li>30DaysOfFullStack Challenge Coming</li>
+            <li>30DaysOfDataAnalysis Challenge Coming</li>
+            <li>30DaysOfReactNative Challenge Coming</li>
+            <li>30DaysOfMachineLearning Challenge Coming</li>
+        </ul>
+    </div>
+    <script>
+        // zmienne ===============================================================
+        const changeButton = document.querySelector(".change");
+        const body = document.querySelector("body");
+
+        // losowy numer potrzebny do generowania kolorów =========================
+          function randomNumber(min,max){
+          return Math.floor(Math.random() * (max - min) + min);
+          }
+
+        // on click change color =================================================
+        changeButton.addEventListener('click', function () {
+                body.style.backgroundColor = 'rgb('+randomNumber(0,255)+','+randomNumber(0,255)+','+randomNumber(0,255)+')'; 
+        })
+
+    </script>
+  </body>
+</html>
+
+
+<!-- colory rgb od 0 do 255.  (255,255,255) -->
+
