@@ -8,10 +8,10 @@
 // Następnie utwórz listę 5 obiektów WaterVessel o losowej pojemności z przedziału 50 - 200 i Water_volume równym 0. 
 
 // Zdefiniuj zmienną Water_canister = 1000, która będzie odzwierciedlała całkowitą do rozlania ilość wody między naczyniami. 
+
 // Proces rozlewania wody ma następować po równo do każdego z naczyń, dopóki nie zostaną one w pełni napełnione lub dopóki Water_canister wyniesie 0. 
 
 
-// ver. 1 - simple
 
 
 // random to volume for class WaterVessel
@@ -64,7 +64,7 @@ while(!(biggestVessel.Water_volume == biggestVessel.volume || Water_canister<=0)
     }});
 }
 
-
+// print result
 console.log(list);
 
 function howMuchLeftWater(){
@@ -80,7 +80,6 @@ let sum = 0;
 list.forEach(e => sum+= e.Water_volume);
 console.log(`We use ${sum} water from Water_canister`);
 
-//git test add
 
 
 
