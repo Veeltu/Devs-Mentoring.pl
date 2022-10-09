@@ -65,5 +65,7 @@ let sum = 0;
 list.forEach(e => sum+= e.Water_volume);
 console.log(sum);
 
+//git test add
+
 
 
