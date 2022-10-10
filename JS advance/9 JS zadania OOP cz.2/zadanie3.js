@@ -111,8 +111,7 @@ Validation.date_joinedValidation(e.date_joined);
 console.log("---------------------------")
 }
 
-// fullValidation(User_1)
+fullValidation(User_1)
 
 // fullValidation(User_2)
 
-console.log(User_1)
