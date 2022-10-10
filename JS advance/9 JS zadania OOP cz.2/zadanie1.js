@@ -1,3 +1,4 @@
+
 // Zad 1.
 // Stwórz klasę, która będzie pełniła rolę wrappera (storage-a) konfiguracji połączeniowej z API. Klasa ta ma się nazywać MyRequest oraz przechowywać takie atrybuty jak: 
 // URL address
@@ -26,24 +27,36 @@
 //  W przeciwnym razie zwracana lista ma być pusta.
 
 class MyRequest{
-    URLaddress;
-    Method;
-    APIToken;
+    #URLaddress;
+    #Method;
+    #APIToken;
     constructor(URLaddress,Method,APIToken){
-        this.URLaddress = URLaddress;
-        this.Method = Method;
-        this.APIToken = APIToken;
+        this.#URLaddress = URLaddress;
+        this.#Method = Method;
+        this.#APIToken = APIToken;
     }
     get URLaddress(){
-        return this.URLaddress;
+        return this.#URLaddress;
     }
     get Method(){
-        return this.Method;
+        return this.#Method;
     }
     get APIToken(){
-        return this.APIToken;
+        return this.#APIToken;
     }
 
+    // set URLaddress(URLaddress){
+    //     this.URLaddress = URLaddress;
+    // }
+
+    // set Method(Method){
+    //     this.Method = Method;
+    // }
+
+    // set APIToken(APIToken){
+    //     this.APIToken = APIToken;
+    // }
+    
 }
 
 
@@ -52,10 +65,11 @@ class Sender{
     }
     
     static sendReq(request, destination){
-        console.log(request)
-        console.log(destination)
-        // console.log('hi sendReq')
-        console.log('-------------------')
+        if(request.URLaddress === '/countries'){
+            return destination.getCountries(request);
+        }else if (request.URLaddress === '/continents'){
+            return destination.getContinents(request);
+        }
     }
 }
 
@@ -64,42 +78,31 @@ class ApiService{
     static continents = ['European', 'Asia', 'Australia', 'Africa', 'Asia'];
     static key = "token";
 
-// constructor(countries, continents, key){
-//     this.countries= countries;
-//     this.continents= continents;
-//     this.key= key;
-// }
     getCountries(request){
-        if ((request.APIToken === key) && (request.Method === 'get')){
-            console.log(countries)
-            return countries;
+        if ((request.APIToken === ApiService.key) && (request.Method === 'get')){
+            return ApiService.countries;
         }
         else {
-            console.log('wrong')
             return [];
         }
     };
     getContinents(request){
-        if ((request.APIToken === key) && (request.Method === 'get')){
-            console.log(continents)
-            return continents;
-
+        if ((request.APIToken === ApiService.key) && (request.Method === 'get')){
+            return ApiService.continents;
         }
         else {
-            console.log('wrong')
             return [];
         }
     };
 }
 //get, put ,post, delete, patch - REST API method
 
-const request = new MyRequest("www.kulaWpłot.com", "get", "token");
+const request = new MyRequest("/continents", "get","token");
+const request2 = new MyRequest("/countries", "get","token");
+const request3 = new MyRequest("/countries", "post","token");
 
 const apiService = new ApiService();
 
-Sender.sendReq(request, apiService);
-// ApiService.getContinents(request);
-// Sender.sendReq(request, ApiService);
-
-// console.log(apiService)
-// console.log(ApiService)
+console.log(Sender.sendReq(request, apiService));
+console.log(Sender.sendReq(request2, apiService));
+console.log(Sender.sendReq(request3, apiService));
