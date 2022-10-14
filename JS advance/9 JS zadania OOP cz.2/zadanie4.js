@@ -1,6 +1,11 @@
 // Zad 4
 // Wyobraź sobie, że poniższa lista reprezentuje nierelacyjną bazę danych użytkowników. 
 
+// Stwórz klasę User, która będzie zawierała takie pola i metody jak:
+// #id, username, email, #password, #createdAt, #isLoggedIn
+// singIn - umożliwiać ona będzie logowanie się użytkownika na podstawie informacji zawartych w bazie (wyżej utworzonej liście users)
+// countLikes - metoda ta będzie przeszukiwać listę products i wyświetlać nazwy produktów, które polubił dany użytkownik (zauważ, że informacje o polubieniach przechowujemy wewnątrz pola likes z rekordu każdego produktu)
+// rateProduct - która przyjmować będzie id produktu wraz z oceną, którą użytkownik chce przypisać
 
 const products = [
   {
@@ -72,17 +77,25 @@ class User{
         if (passwords.includes(newUser.password) && (names.includes(newUser.username))){
             console.log('singIn : logging in...')
         } else {
-            console.log('singIn : wrong login or password');
+            console.log('singIn : wrong login or password')
         }
-    }
-    // countLikes - metoda ta będzie przeszukiwać listę products i wyświetlać nazwy produktów, które polubił dany użytkownik (zauważ, że informacje o polubieniach przechowujemy wewnątrz pola likes z rekordu każdego produktu)
-    static countLikes(){
+    };
 
-        console.log('countLikes')}
-        // rateProduct - która przyjmować będzie id produktu wraz z oceną, którą użytkownik chce przypisać
-    static rateProduct() {   
-        console.log('rateProduct')}
+    static countLikes(){
+        for (let i=0;i<products.length;i++){
+            if(products[i].likes.includes(countLikesUser)){
+                // console.log(products[i])
+                console.log(`Product that User likes : ${products[i].name}`)
+            } 
+        }
+    };
+    // rateProduct - która przyjmować będzie id produktu wraz z oceną, którą użytkownik chce przypisać
+    static rateProduct(idProcduct, rate) {   
+        
+    }
 }
+
+// Users base
 
     const users = [
     new User("ab12ex", "Alex", "alex@alex.com", "123123"),
@@ -91,13 +104,16 @@ class User{
     new User("eefamr", "Martha", "martha@martha.com", "123222"),
     new User("ghderc", "Thomas", "thomas@thomas.com", "123333"),
 ]
+
 // -------------++++SING IN++++-----------------//
-// 2 profiles for new User:
+
+// 2 profiles for new User to check if method work:
+
 // 1.invalid user
 // const newUser = new User("aweda", "Anthony", "anthony@tu.io", "1234412");
+
 // 2. valid user 
 const newUser = new User("ab12ex", "Alex", "alex@alex.com", "123123")
-
 
 // create array form names and passwords for login validate
 const names = [];
@@ -115,60 +131,59 @@ Object.values(users).forEach(e =>
 
 // -------------++++COUNT LIKES++++-----------------//
 
-// console.log(Object.values(products))
-
-const likes = [];
-Object.values(products).forEach(e =>
-    {
-        likes.push(e.likes)
-    })
-    console.log(likes)
-// szukamy nazwy produktów które polubił użytkownik
-// if product includes that id to console log ( he like)
-// who is he ? np. Alex ab12ex ...
-
-// console.log(Object.values(users))
-// const found = names.find('Alex');
-// const newArray = [];
-// Object.values(users).forEach(e =>{
-//     console.log(e.username)
-//     newArray.push(e.username)
-
-// })
-// console.log(newArray)
-
-const newMap = new Map();
+// create map for username => id to find username with id
+const newMapUsernameId = new Map();
 Object.values(users).forEach((e) => {
-    newMap.set(e.username, e.id);
+    newMapUsernameId.set(e.username, e.id);
 })
-// console.log(newMap)
-// console.log(newMap.get('Asab'))
-
-const countLikesUser = newMap.get('Asab')
-console.log(countLikesUser)
-
-function check(){
-    if (likes.includes(countLikesUser)){
-        console.log('hi')
-    } else {
-        console.log('noo')
-    }
+// f. to find username with id 
+let countLikesUser = '';
+function getName (username) {
+    countLikesUser += newMapUsernameId.get(username) // take 'username' id
 }
-check();
+getName('Asab') //find what products like 'Asab'
 
-// problem biezacy - jak : wyswietl produkty ktore lubi asab / a może prościej ?
-// if ()
+// User.countLikes(); 
 
-
-
-
-
-
-
-// Stwórz klasę User, która będzie zawierała takie pola i metody jak:
-// #id, username, email, #password, #createdAt, #isLoggedIn
-// singIn - umożliwiać ona będzie logowanie się użytkownika na podstawie informacji zawartych w bazie (wyżej utworzonej liście users)
-// countLikes - metoda ta będzie przeszukiwać listę products i wyświetlać nazwy produktów, które polubił dany użytkownik (zauważ, że informacje o polubieniach przechowujemy wewnątrz pola likes z rekordu każdego produktu)
+// -------------++++RATE PRODUCT++++-----------------//
 // rateProduct - która przyjmować będzie id produktu wraz z oceną, którą użytkownik chce przypisać
+
+const newMapProductsIdRate = new Map();
+Object.values(products).forEach((e) => {
+    newMapProductsIdRate.set(e._id, e.ratings)
+})
+// console.log(newMapProductsIdRate);
+
+// soo I want add to product one rating
+function add(productName, idUser, rating){
+    
+    for (let i=0;i<products.length;i++){
+        // console.log(products[i])
+        if(products[i].name.includes(productName)){
+            console.log(products[i].ratings)
+            // products[i].ratings.push(rating);
+            // products[i].ratings.Object.
+            
+            products[i](ratings.userId= 'wad' )
+            // how to add new obcject to ratings ?
+
+            // products[i].Object.create(usernameId: usernameId, rate: rating)
+        }
+
+
+    }
+
+
+    
+    // // console.log(Object.values(products))
+    // Object.values(products).forEach(e => {
+    //     // if (e.includes(productName)){
+    //         console.log(e)
+        // }
+    // }
+    // )
+}
+
+add('TV', 4);
 
 
