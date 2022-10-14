@@ -146,6 +146,8 @@ getName('Asab') //find what products like 'Asab'
 // User.countLikes(); 
 
 // -------------++++RATE PRODUCT++++-----------------//
+// NOT FINISH!!!
+
 // rateProduct - która przyjmować będzie id produktu wraz z oceną, którą użytkownik chce przypisać
 
 const newMapProductsIdRate = new Map();
@@ -163,7 +165,7 @@ function add(productName, idUser, rating){
             console.log(products[i].ratings)
             // products[i].ratings.push(rating);
             // products[i].ratings.Object.
-            
+
             products[i](ratings.userId= 'wad' )
             // how to add new obcject to ratings ?
 
