@@ -44,21 +44,7 @@ class MyRequest{
     get APIToken(){
         return this.#APIToken;
     }
-
-    // set URLaddress(URLaddress){
-    //     this.URLaddress = URLaddress;
-    // }
-
-    // set Method(Method){
-    //     this.Method = Method;
-    // }
-
-    // set APIToken(APIToken){
-    //     this.APIToken = APIToken;
-    // }
-    
 }
-
 
 class Sender{
     constructor(){
