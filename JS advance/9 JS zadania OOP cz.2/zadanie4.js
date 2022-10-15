@@ -84,14 +84,23 @@ class User{
     static countLikes(){
         for (let i=0;i<products.length;i++){
             if(products[i].likes.includes(countLikesUser)){
-                // console.log(products[i])
                 console.log(`Product that User likes : ${products[i].name}`)
             } 
         }
     };
-    // rateProduct - która przyjmować będzie id produktu wraz z oceną, którą użytkownik chce przypisać
-    static rateProduct(idProcduct, rate) {   
-        
+ 
+    static rateProduct(productName, userId, rate) {   
+        for (let i=0;i<products.length;i++){
+
+            if(products[i].name.includes(productName)){
+    
+                const ratings = products[i].ratings;
+                console.log(ratings);
+    
+                const newObject = {userId, rate};
+                ratings.push(newObject)
+                        }
+            }
     }
 }
 
@@ -127,7 +136,7 @@ Object.values(users).forEach(e =>
         passwords.push(e.password)
     })
 
-// User.singIn();
+User.singIn();
 
 // -------------++++COUNT LIKES++++-----------------//
 
@@ -143,49 +152,10 @@ function getName (username) {
 }
 getName('Asab') //find what products like 'Asab'
 
-// User.countLikes(); 
+User.countLikes(); 
 
 // -------------++++RATE PRODUCT++++-----------------//
-// NOT FINISH!!!
 
-// rateProduct - która przyjmować będzie id produktu wraz z oceną, którą użytkownik chce przypisać
-
-const newMapProductsIdRate = new Map();
-Object.values(products).forEach((e) => {
-    newMapProductsIdRate.set(e._id, e.ratings)
-})
-// console.log(newMapProductsIdRate);
-
-// soo I want add to product one rating
-function add(productName, idUser, rating){
-    
-    for (let i=0;i<products.length;i++){
-        // console.log(products[i])
-        if(products[i].name.includes(productName)){
-            console.log(products[i].ratings)
-            // products[i].ratings.push(rating);
-            // products[i].ratings.Object.
-
-            products[i](ratings.userId= 'wad' )
-            // how to add new obcject to ratings ?
-
-            // products[i].Object.create(usernameId: usernameId, rate: rating)
-        }
-
-
-    }
-
-
-    
-    // // console.log(Object.values(products))
-    // Object.values(products).forEach(e => {
-    //     // if (e.includes(productName)){
-    //         console.log(e)
-        // }
-    // }
-    // )
-}
-
-add('TV', 4);
+User.rateProduct('TV', 'user123', 3.4)
 
 
