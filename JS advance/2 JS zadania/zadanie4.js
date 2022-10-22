@@ -22,15 +22,27 @@
 
 //* -1- set number of ppl in API line
 
-// let API = 'https://fakerapi.it/api/v1/persons?_quantity=<number_of_people>'
+let api = 'https://fakerapi.it/api/v1/persons?_quantity=<number_of_people>'
 
-// API = API.replace("<number_of_people", 10)
+api = api.replace("<number_of_people", 10)
+// console.log(api)
 
-setNumberOfPeopleAPI = (number) => {
-    let API = 'https://fakerapi.it/api/v1/persons?_quantity=<number_of_people>'
-    API = API.replace("<number_of_people", number)
-    return;
-};
-console.log(setNumberOfPeopleAPI(10))
+const dataFromApi = [];
+
+fetch(api)
+.then(res => res.json())
+.then(data => Object.values(data).forEach(e => {
+    console.log(e)
+    Object.values(e).forEach(a => {
+        // console.log(a.firstname)
+        const namePhoto = {name: a.firstname, lastname: a.lastname, image: a.image }
+        dataFromApi.push(namePhoto)
+    })
+}))
+console.log(dataFromApi)
+// setNumberOfPeopleAPI = (number) => {
+//         API.replace("<number_of_people", number)
+//     return;
+// };
+// console.log(setNumberOfPeopleAPI(10))
 //? how make function of this ? UP
-
