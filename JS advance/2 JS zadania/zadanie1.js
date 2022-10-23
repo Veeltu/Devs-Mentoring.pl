@@ -2,6 +2,7 @@
 const countriesAPI = 'https://restcountries.com/v3.1/all' 
 const countriesInfoArray = [];
 const countriesSpecificInfoArray = [];
+const ten = [];
 
 async function countriesJSON(){
     const response = await fetch (countriesAPI);
@@ -19,24 +20,13 @@ countriesJSON().then(countriesInfo => {
             }
         countriesSpecificInfoArray.push(countriesSpecificInfo)
     })
+    let sortCountries = Object.values(countriesSpecificInfoArray).sort((a,b) => b.area - a.area)
+    let tenLargestCountries = sortCountries.slice(0,10)
+    console.log(tenLargestCountries)
+    ten.push(tenLargestCountries)
 }
 )
-// console.log(countriesInfoArray)
-// console.log(countriesSpecificInfoArray)
-
-
-//* first 10 largest area
-// let sortCountries = Object.entries(countriesSpecificInfoArray).sort((a,b) => b.area - a.area)
-let sortCountries = countriesSpecificInfoArray.sort(a => a.area)
-let tenLargestCountries = sortCountries.slice(0,3)
-console.log(countriesSpecificInfoArray)
-// console.log(sortCountries)
-// console.log(tenLargestCountries)
-console.log(countriesSpecificInfoArray.length)
-
-
-
-
+console.log(ten)
 
 //* --- CATS
 
