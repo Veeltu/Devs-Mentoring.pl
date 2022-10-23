@@ -19,23 +19,20 @@
 //     });
 // }
 
-//? NOT SURE...
-
-//* first way
-async function job(result, database, errorManager) {
-    try {
-        let getId = (id) => { return database.get(id)}
-        let getName = (info) => { return info.name};
-    }
-    catch(error) {
-        let err = (error) => { errorManager.notify(error); throw error}
-    }
-}
-//* second way
-fetch(database)
- .then(database => {return database.get(id)})
- .then(info => {return info.name})
- .catch(error => {errorManager.notify(error); throw error;});
 
 
+ async function f() {
+
+    let promise = new Promise((resolve, reject) => {
+      setTimeout(() => resolve("done!"), 1000)
+    });
+  
+    let result = await promise; // wait until the promise resolves (*)
+  
+    alert(result); // "done!"
+  }
+
+
+//   let response = await fetch('/article/promise-chaining/user.json');
+//   let user = await response.json();
  
