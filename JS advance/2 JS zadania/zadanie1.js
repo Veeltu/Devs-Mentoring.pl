@@ -12,18 +12,18 @@ async function countriesJSON(){
 countriesJSON().then(countriesInfo => {
         Object.values(countriesInfo).forEach(e => {
             let countriesSpecificInfo = {
-                // country: e.name.common, 
-                // capital: e.capital, 
-                // languages: e.languages, 
-                // population: e.population,
+                country: e.name.common, 
+                capital: e.capital, 
+                languages: e.languages, 
+                population: e.population,
                 area: e.area
             }
         countriesSpecificInfoArray.push(countriesSpecificInfo)
     })
-    let sortCountries = Object.values(countriesSpecificInfoArray).sort((a,b) => b.area - a.area)
-    let tenLargestCountries = sortCountries.slice(0,10)
-    console.log(tenLargestCountries)
-    ten.push(tenLargestCountries)
+        let sortCountries = Object.values(countriesSpecificInfoArray).sort((a,b) => b.area - a.area)
+        let tenLargestCountries = sortCountries.slice(0,10)
+        // console.log(tenLargestCountries)
+        ten.push(tenLargestCountries)
 }
 )
 console.log(ten)
