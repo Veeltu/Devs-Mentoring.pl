@@ -71,15 +71,25 @@ countriesJSON()
         
 //* find most popular languages ,and show how many time they appear
 
-        function mostPopularLanguages (a) {
-           const languagesArray = [];// 250 objects with languages in array
+        // function mostPopularLanguages (a) {
+        //    const languagesArray = [];// 250 objects with languages in array
 
-           Object.values(a).forEach(e => {
-                  console.log(Object.values(e.languages)[0])
-            })
-            console.log(languagesArray)
-        }
-// PLAN => robimy z e.languages map(by wyszczegolnic jezyki - bez duplikatow) i za ich pomoca szukamy duplikatow w wielkiej tablicy wyszstkich jezykow - easy
+        //    Object.values(a).forEach(e => {
+        //           console.log(Object.values(e.languages)[0])
+        //     })
+        //     console.log(languagesArray)
+        // }
+
+
+        // function mostPopularLanguages (a) {
+        //    return Object.values(a).forEach(e => {
+        //     // console.log(e)
+        //     return e.population[0];
+        //    })
+        // }
+
+        
+        // PLAN => robimy z e.languages map(by wyszczegolnic jezyki - bez duplikatow) i za ich pomoca szukamy duplikatow w wielkiej tablicy wyszstkich jezykow - easy
 // dwie zmienne 1. array wszystkich 2. mapa bez duplikatow
 
         
