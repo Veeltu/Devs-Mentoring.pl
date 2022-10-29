@@ -38,11 +38,9 @@ countriesJSON()
 
         // population in specific continent     
         function populationArray(specificContinent){
-            const populationArray = [];
-            Object.values(specificContinent).forEach(e => {
-                return populationArray.push(e.population)
+            return Object.values(specificContinent).map(e => {
+                return e.population;
             })
-            return populationArray;
         }
         // console.log(populationArray(getContinent('Asia')))
     
@@ -74,23 +72,16 @@ countriesJSON()
         // function mostPopularLanguages (a) {
         //    const languagesArray = [];// 250 objects with languages in array
 
-        //    Object.values(a).forEach(e => {
-        //           console.log(Object.values(e.languages)[0])
-        //     })
-        //     console.log(languagesArray)
-        // }
+        function mostPopularLanguages (a) {
+           return Object.values(a).map(e => {
+               return e.languages;
+
+           })
+        }
 
 
-        // function mostPopularLanguages (a) {
-        //    return Object.values(a).forEach(e => {
-        //     // console.log(e)
-        //     return e.population[0];
-        //    })
-        // }
-
-        
-        // PLAN => robimy z e.languages map(by wyszczegolnic jezyki - bez duplikatow) i za ich pomoca szukamy duplikatow w wielkiej tablicy wyszstkich jezykow - easy
-// dwie zmienne 1. array wszystkich 2. mapa bez duplikatow
+        // PLAN => 
+// dwie zmienne 1. array wszystkich 2. mapa bez duplikatow 3. wyciągnąć pojedyncze nazwy 4. jak często pojawiaja się nazwy i ile razy 5. sort by numbers
 
         
         console.log(mostPopularLanguages(countriesInfo));
