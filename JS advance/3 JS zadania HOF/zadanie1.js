@@ -32,42 +32,28 @@ const animals = [
 	{name: 'Zorka', eyes: 2, type: 'dog'}
 ];
 
-function makeString(animals) {
-    newArray = [];
-    Object.values(animals).map((e) => {
-        const newDate = (`${e.name} is a ${e.type}, and has ${e.eyes}`);
-        newArray.push(newDate);
-    })
-    return newArray; 
-}
-// console.log(makeString(animals));
+let makeString = animals => { return animals.map(a => `${a.name} is a ${a.type}, and has ${a.eyes}`)}
+
+console.log(makeString(animals));
 
 //* Przefiltruj listę animals - tak, aby otrzymać listę tylko tych zwierzat, przechowują informacje o psach.
 
-function findAnimal(animals ,animalType) {
-    newArray = [];
-    Object.values(animals).map((e) => {
-        if (e.type === animalType){
-            newArray.push(e)
-        }
-    })
-    return newArray;
-}
+
+let findAnimal = (animals,animalType) => animals.filter(e => {
+     if (e.type ===animalType) 
+     {return e}})
+
 // console.log(findAnimal(animals,'dog'))
 
 //*Otrzymaj z listy animals stringa, który będzie składał się tylko i wyłącznie z imion zwierząt, tj. ‘Burek Milelon Pusia Puszek Zorka’
 
-function makeNewString (animals){
-    newArray = [];
-    Object.values(animals).map((e)=> {
-        const names = (`${e.name}`);
-        newArray.push(names)
-    })
-    newString = newArray.toString();
-    return newString;
+let makeNewString = (animals) => {
+    result = ''
+    animals.forEach((e) => (result += ` ${e.name}`))
+    return result
 }
 
-// console.log(makeNewString(animals))
+console.log(makeNewString(animals))
 
 //*Otrzymaj z listy animals stringa, który będzie składał się tylko i wyłącznie z imion psów, tj. ‘Puszek Zorka’
 

@@ -13,6 +13,9 @@ Oblicz sumę cen produktów, korzystając tylko i wyłącznie z funkcji .reduce(
 Znajdź nazwy produktów, których ceny podane są w nieliczbowym formacie. 
 */
 
+  const obj =  { product: 'banana', price: 3 }
+  Object.values(obj) // => ['banana' , 3]
+
 const products = [
   { product: 'banana', price: 3 },
   { product: 'mango', price: 6 },
@@ -23,10 +26,25 @@ const products = [
 ]
 
 const sumPriceReduce = (array) => {
-  const price = Object.values(array).map((e) => {return Math.floor(e.price)})
-  const sum = price.reduce((acc, cur) => acc + cur);
+  const price = Object.values(array).map(e =>  (Math.floor(e.price)))
+  const sum = price.reduce((acc, cur) => acc + cur, 0);
   return sum;
 }
+
+// prince.reduce((acc, cur) => {
+//     if(cur >= 0){
+//       return {...acc, positive: acc.positive+1}
+//     } else{
+//       return {...acc, negative: acc.negative+1}
+//     }
+// }, {positive:0, negative:0})
+
+/*
+tab = [1,2,3,4,5]
+acc = 0+1 =>11 | 11 + 2=>13 |
+
+*/
+
 console.log(sumPriceReduce(products));
 
 const sumPriceForEach = (array) => {

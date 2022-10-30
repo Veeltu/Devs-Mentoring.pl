@@ -20,70 +20,105 @@ countriesJSON()
 //* countries which have more than 37kk population
         
     // show countries witch population more than "number"
-        function populationMoreThan (populationNumber) {
-            return Object.values(countriesInfo).filter((e) => {
-                return e.population > populationNumber;
-            })
+        const populationMoreThan = (populationNumber) => {
+            return countriesInfo.filter(e => {return e.population > populationNumber})
         }
         // console.log(populationMoreThan(37000000))
 
 //* population mean in each continent 
 
     // target continent name witch is in array
-    function getContinent(continentName) { 
-            return Object.values(countriesInfo).filter((e) => {
-                return e.continents[0] === continentName;
+        const getContinent = (continentName) => { 
+            return countriesInfo.filter(e => {
+                return e.continents[0] === continentName
+            })
+        }
+    // population in specific continent     
+        const populationArray = (specificContinent) => {
+            return specificContinent.map(e => {
+                return e.population
             })
         }
 
-        // population in specific continent     
-        function populationArray(specificContinent){
-            return Object.values(specificContinent).map(e => {
-                return e.population;
-            })
-        }
         // console.log(populationArray(getContinent('Asia')))
     
     // mean (średnia) specific continent
-        function mean (specificContinent) {
+
+        const mean = (specificContinent) => {
             return populationArray(specificContinent).reduce((total, amount, index, array)=>{
                 total += amount;
-                if(index ===array.length){ return total/ array.length}
+                if(index ===array.length){ 
+                    return total/ array.length}
                 return total;
             })
         }
         // console.log(mean(getContinent('Asia')));
-  
+
 //* find countries witch largest population in continents
-        
-        function largestPopulationCountryInContinent (getContinent) {
+
+        const largestPopulationCountryInContinent = (getContinent) => {
             // max population number from array
             let maxPopulation =  Math.max(...(populationArray(getContinent)));
             
             // return country with === maxPopulation
             const country = Object.values(getContinent).find(e => e.population === maxPopulation);
             return country.name.common;
-        }
+        } 
         
         // console.log(largestPopulationCountryInContinent(((getContinent('Europe')))));
         
 //* find most popular languages ,and show how many time they appear
 
-        // function mostPopularLanguages (a) {
-        //    const languagesArray = [];// 250 objects with languages in array
+     
+        // TODO: cant target objects values
 
-        function mostPopularLanguages (a) {
-           return Object.values(a).map(e => {
-               return e.languages;
 
-           })
-        }
-
+        const myArray = [];
+        const mostPopularLanguages = (countriesInfo) => {
+            const languagesArray = countriesInfo.map(e => {
+                return e.languages
+            })
+            // myArray.push(...languagesArray)
+            // return languagesArray
+            // const find = languagesArray.map(e => { return e})
+            const find = languagesArray.map(e => { return Object.values(e)})
+            return find;
+        } 
+        console.log(mostPopularLanguages(countriesInfo))
 
         // PLAN => 
 // dwie zmienne 1. array wszystkich 2. mapa bez duplikatow 3. wyciągnąć pojedyncze nazwy 4. jak często pojawiaja się nazwy i ile razy 5. sort by numbers
 
         
-        console.log(mostPopularLanguages(countriesInfo));
+        // console.log(mostPopularLanguages(countriesInfo));
         
     })
+
+
+
+// DUPLICATES
+            // const mySet = new Set();
+
+            // const filteredArr = languagesArray.filter(e => {
+            //     const duplicate = mySet.has(e.id);
+            //     mySet.add(e.id);
+            //     return !duplicate;
+            // });
+
+            // return filteredArr
+
+//notes 
+
+            // const arr = [ //8 objects
+            // { aame: "test1" },
+            // { bame: "test3" },
+            // { came: "test3" },
+            // { dame: "test3" },
+            // { eame: "test1" },
+            // { fame: "test3" },
+            // { game: "test3" },
+            // { hame: "test3" },
+            // ];
+            // const filter = arr.map(e => { return Object.values(e)})
+            // console.log(filter)
+

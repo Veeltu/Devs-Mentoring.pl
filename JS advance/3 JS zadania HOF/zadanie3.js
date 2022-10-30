@@ -42,27 +42,29 @@ const people = [
 ];
 
 class DataManipulator {
-
-    // Array.prototype.some
+// Sprawdź, czy co najmniej jedna osoba ma ukończone 19 lat.
     isOnePersonOlderThenAge(age, array){
         return Object.values(array).some((person) => {
             const actualYear = new Date().getFullYear();              
             return (actualYear - person.year) > age;               
         })    
     }
+// Sprawdź, czy wszyscy mają powyżej 19 lat
     isAllPeopleOlderThenAge(age, array){
         return Object.values(array).every((person) => {
             const actualYear = new Date().getFullYear();              
             return (actualYear - person.year) > age;               
         })    
     }
+// Wykorzystując funkcję find(), znajdź imie osoby urodzonej po 2000 roku
     findOnePersonBornAfterYear(year, array){
         const person = Object.values(array).find((person) => person.year > year)
         return person.name;
     }
-    
 }
+// creating object to use methods
 const dataManipulator = new DataManipulator();
+// methods
 const bool = dataManipulator.isOnePersonOlderThenAge(19, people);
 const bool2 = dataManipulator.isAllPeopleOlderThenAge(19, people);
 const bool3 = dataManipulator.findOnePersonBornAfterYear(2000, people)
@@ -71,6 +73,7 @@ console.log(bool2)
 console.log(bool3)
 
 //------------------------------------------------------------
+// Połącz elementy z listy comments oraz people do pojedynczych słowników zawartych w nowej liście opinions (obiekt opinions to końcowy efekt po połączeniu obiektów comments i people)
 
 const comments = [
           { text: 'Love this!', id: 523423 },
@@ -86,4 +89,3 @@ for(let i = 0; i < comments.length && i < people.length; i++ ){
 }
 
 console.log(opinions);
-
