@@ -39,9 +39,7 @@ console.log(makeString(animals));
 //* Przefiltruj listę animals - tak, aby otrzymać listę tylko tych zwierzat, przechowują informacje o psach.
 
 
-let findAnimal = (animals,animalType) => animals.filter(e => {
-     if (e.type ===animalType) 
-     {return e}})
+let findAnimal = (animals,animalType) => animals.filter(e => e.type == animalType) 
 
 // console.log(findAnimal(animals,'dog'))
 

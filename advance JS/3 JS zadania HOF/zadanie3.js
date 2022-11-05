@@ -83,9 +83,16 @@ const comments = [
     ];
 
 const opinions = [];
+//const opinions = [
+//     { name: 'Wes', year: 1988, text: 'Love this!', id: 523423},
+//     { name: 'Kait', year: 1986, text: 'Super good', id: 823423 },
+//     { name: 'Irv', year: 1970, text: 'You are the best', id: 2039842 },
+//     { name: 'Lux', year: 2015, text: 'Ramen is my fav food ever', id: 123523}
+// ];
 
 for(let i = 0; i < comments.length && i < people.length; i++ ){
     opinions.push({...people[i],...comments[i]})
+    
 }
 
 console.log(opinions);

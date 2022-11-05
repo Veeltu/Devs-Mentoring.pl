@@ -70,7 +70,7 @@ humans().then(humansJson => {
         const new_row_lastname = dataFromApi[i].lastname
 
     // set src and ulr to img
-        new_row_img.setAttribute( "src", new_img_url );
+        new_row_img.setAttribute( "src", `${new_img_url}` );
 
     // set text to new_row
         new_row.innerHTML = ( `${new_row_name} ${new_row_lastname}` )
