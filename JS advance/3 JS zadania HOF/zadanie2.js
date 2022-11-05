@@ -26,7 +26,7 @@ const products = [
 ]
 
 const sumPriceReduce = (array) => {
-  const price = Object.values(array).map(e =>  (Math.floor(e.price)))
+  const price = array.map(e =>  (Math.floor(e.price)))
   const sum = price.reduce((acc, cur) => acc + cur, 0);
   return sum;
 }
@@ -50,7 +50,7 @@ console.log(sumPriceReduce(products));
 const sumPriceForEach = (array) => {
   // create array for "price"
   const priceArray = [];
-  Object.values(array).forEach((e) => { 
+  array.forEach((e) => { 
     const price = Math.floor(e.price);
     priceArray.push(price)
   })

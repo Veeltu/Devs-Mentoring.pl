@@ -77,4 +77,23 @@ console.log('is more alivie woman than man ?',moreAliveWomanThanManQuestion());
 
 // 6. Znajdź bohaterów, którzy wstąpili w jednym odcinku - every
 
-// if 
+const episodes = [];
+const getEpisodes = characters.forEach(e => {
+    episodes.push(e.episode)
+})
+console.log(episodes) //array of arrays with objects
+// console.log(...episodes) //arrays with objects
+const episodesMore = toString(episodes) 
+
+
+console.log(episodesMore)
+// nieeee, jeśli jakiś episod wystepuje wiecej niz raz, tak ma byc
+
+// const same = e => {
+//     episodes.
+// }
+// console.log(same)
+// a();
+
+
+

@@ -44,21 +44,21 @@ const people = [
 class DataManipulator {
 // Sprawdź, czy co najmniej jedna osoba ma ukończone 19 lat.
     isOnePersonOlderThenAge(age, array){
-        return Object.values(array).some((person) => {
+        return array.some((person) => {
             const actualYear = new Date().getFullYear();              
             return (actualYear - person.year) > age;               
         })    
     }
 // Sprawdź, czy wszyscy mają powyżej 19 lat
     isAllPeopleOlderThenAge(age, array){
-        return Object.values(array).every((person) => {
+        return array.every((person) => {
             const actualYear = new Date().getFullYear();              
             return (actualYear - person.year) > age;               
         })    
     }
 // Wykorzystując funkcję find(), znajdź imie osoby urodzonej po 2000 roku
     findOnePersonBornAfterYear(year, array){
-        const person = Object.values(array).find((person) => person.year > year)
+        const person = array.find((person) => person.year > year)
         return person.name;
     }
 }
