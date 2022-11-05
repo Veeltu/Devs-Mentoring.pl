@@ -75,25 +75,49 @@ const moreAliveWomanThanManQuestion = e => {
 
 console.log('is more alivie woman than man ?',moreAliveWomanThanManQuestion());
 
-// 6. Znajdź bohaterów, którzy wstąpili w jednym odcinku - every
+// 6. Znajdź bohaterów, którzy wstąpili w jednym odcinku 
 
-const episodes = [];
-const getEpisodes = characters.forEach(e => {
-    episodes.push(e.episode)
+const oneEpisodeHero = characters.filter(e => {
+    if (e.episode.length == 1) {return e}
 })
-console.log(episodes) //array of arrays with objects
-// console.log(...episodes) //arrays with objects
-const episodesMore = toString(episodes) 
 
+console.log('one time episode heros', oneEpisodeHero)
 
-console.log(episodesMore)
-// nieeee, jeśli jakiś episod wystepuje wiecej niz raz, tak ma byc
+// 7. W ilu postaciach wystąpił "Rick"
 
-// const same = e => {
-//     episodes.
+const findRick = characters.filter(e => {
+    if (e.name.includes("Rick") == true) {return e}
+})
+console.log('how many times rick appear ',findRick.length)
+
+//8. Stwórz obiekt, opisujący płeć wraz z ilością bohaterów:
+// przykładowa odpowiedź:
+// {
+// Female: 10,
+// unknown: 2,
+// Male: 5,
 // }
-// console.log(same)
-// a();
 
+class genderWars {
+    genderAppears(characters, genderType) {
+        const gender = characters.filter(e =>{
+            if (e.gender == genderType) {return e}
+        })
+        return gender.length;
+    }
 
+}
 
+const genderCount = new genderWars ();
+
+const maleCount = genderCount.genderAppears(characters, "Male");
+const femaleCount = genderCount.genderAppears(characters, "Female")
+const unknownCount = genderCount.genderAppears(characters, "unknown")
+
+console.log('female count', femaleCount)
+console.log('male count', maleCount)
+console.log('unknown count', unknownCount)
+
+const newGenderCountObject = {female: femaleCount, male: maleCount, unknown: unknownCount}
+
+console.log(newGenderCountObject)
