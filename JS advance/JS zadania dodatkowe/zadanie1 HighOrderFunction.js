@@ -26,6 +26,7 @@ console.log('number of heroes', numberOfHeroes)
 const womenHeroes = characters.filter(e => {
     if (e.gender.includes("Female") == true) { return e };
 })
+
 console.log('number of women heroes', womenHeroes.length)
 
 // most popular heroes
@@ -35,23 +36,45 @@ const mostPopulatHeroes = e =>{
     characters.forEach(e => {
         mostPopulatHeroesArray.push(e.episode.length)
 })
-console.log(mostPopulatHeroesArray)
+
     let temp = 0;
     mostPopulatHeroesArray.forEach(e => {
         if (temp < e){temp = e}
     })
+
     const mostPopulatHeroesName = characters.filter(e => {
-        if (e.episode.length == temp) { return e }
+        if (e.episode.length == temp) { return e.name }
     })
     console.log('most popular heroes are', mostPopulatHeroesName)
 }
 mostPopulatHeroes();
 
-// how many of heroes live on Earth ( (Earth (C-137)) )
+// how many of heroes live on Earth ( (Earth (C-137)) ) origin
 
+    const heroesOnEarthArray = characters.filter(e => {
+        if (e.origin.name.includes("Earth (C-137") == true) {return e}
+    })
 
+    console.log('number of heroes live on Earth ',heroesOnEarthArray.length)
 
+// 5. Czy to prawda, że wśród bohaterów więcej jest żywych kobiet niż martwych mężczyzn (to z gwiazdką, trochę trudniejsze)
 
+//return true if alive women > dead man
 
+const aliveWomen = characters.filter(e => {
+    if ((e.status.includes("Alive") == true) && (e.gender.includes("Female") == true)) {return e}
+})
+const deadMan = characters.filter(e => {
+    if ((e.status.includes('Dead') == true) && (e.gender.includes("Male") == true)) { return e}
+})
 
+const moreAliveWomanThanManQuestion = e => {
+    if (aliveWomen > deadMan) {return true}
+    else { return false}
+}
 
+console.log('is more alivie woman than man ?',moreAliveWomanThanManQuestion());
+
+// 6. Znajdź bohaterów, którzy wstąpili w jednym odcinku - every
+
+// if 
