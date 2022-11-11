@@ -49,33 +49,39 @@ countriesJSON()
 
 //* find countries witch largest population in continents
 
-        const largestPopulationCountryInContinent = (getContinent) => { // TODO: zrobić to reducem
-            // max population number from array
-            let maxPopulation =  Math.max(...(populationArray(getContinent)));
+        const newReduce = getContinent => {
+
+            const maxPopulation = getContinent.reduce((acc, cur) => acc > cur.population ? acc : cur.population)
+
+            const findCounty = getContinent.find(e => e.population === maxPopulation)
             
-            // return country with === maxPopulation
-            const country = Object.values(getContinent).find(e => e.population === maxPopulation);
-            return country.name.common;
-        } 
-        
-        console.log(largestPopulationCountryInContinent(((getContinent('Europe')))));
+            return findCounty.name.common
+    }
+        // console.log(newReduce(getContinent('Asia')))
         
 //* find most popular languages ,and show how many time they appear
 
-     
-        // TODO: dokończ zadanie + testy i local storage
+        // console.log(countriesInfo)
 
-        // let result = countriesInfo.reduce((acc, cur)=> { // TOOD: Uwzgkędnisz wszystkie języki 
-        //     if(!cur.languages) return acc
-        //     const lang = Object.values(cur.languages)[0]
-        //     if(acc[lang]){
-        //         acc[lang] = acc[lang] + 1
-        //     } else {
-        //         acc[lang] = 1
-        //     }
-        //     return acc
-        // }, {})
-        // // console.log(result)
+        let result = countriesInfo.reduce((acc, cur)=> { 
+
+            if(!cur.languages) return acc
+            
+            const lang = Object.values(cur.languages).forEach(e => {
+                if(acc[e]){
+                    acc[e] = acc[e] + 1
+                } else {
+                    acc[e] = 1
+                }
+            })
+            // console.log(lang)
+            
+            return acc
+            
+        }, {})
+
+        console.log(result)
 
     })
+
 
