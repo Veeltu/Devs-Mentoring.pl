@@ -13,82 +13,77 @@
 // Male: 5,
 // }
 
-import { characters } from "./arrayCharacters.js"
-console.log(characters[0])
+import { characters } from "./arrayCharacters.js";
+console.log(characters[0]);
 
 // number of heroes
 
-const numberOfHeroes = characters.length
-console.log('number of heroes', numberOfHeroes)
+const numberOfHeroes = characters.length;
+console.log("number of heroes", numberOfHeroes);
 
-// number of women heroes 
+// number of women heroes
 
-const womenHeroes = characters.filter(e => {
-    if (e.gender.includes("Female") == true) { return e };
-})
+const womenHeroes = characters.filter((e) => e.gender === "Female").length;
 
-console.log('number of women heroes', womenHeroes.length)
+// e.gender == "Female"
+// e.gender.includes("Female") => Females male
+
+console.log("number of women heroes", womenHeroes);
 
 // most popular heroes
 
-const mostPopulatHeroes = e =>{
-    const mostPopulatHeroesArray = [];
-    characters.forEach(e => {
-        mostPopulatHeroesArray.push(e.episode.length)
-})
+const mostPopulatHeroes = (e) => {
+  let max = characters.reduce(
+    (acc, cur) => (cur.episode.length > acc ? cur.episode.length : acc),
+    0
+  );
 
-    let temp = 0;
-    mostPopulatHeroesArray.forEach(e => {
-        if (temp < e){temp = e}
-    })
-
-    const mostPopulatHeroesName = characters.filter(e => {
-        if (e.episode.length == temp) { return e.name }
-    })
-    console.log('most popular heroes are', mostPopulatHeroesName)
-}
+  const mostPopulatHeroesName = characters.filter(
+    (e) => e.episode.length == max
+  );
+  console.log("most popular heroes are", mostPopulatHeroesName);
+};
 mostPopulatHeroes();
 
-// how many of heroes live on Earth ( (Earth (C-137)) ) origin
+// how many of heroes live on Earth origin
 
-    const heroesOnEarthArray = characters.filter(e => {
-        if (e.origin.name.includes("Earth (C-137") == true) {return e}
-    })
+const heroesOnEarthArray = characters.filter((e) =>
+  e.origin.name.includes("Earth")
+);
 
-    console.log('number of heroes live on Earth ',heroesOnEarthArray.length)
+console.log("number of heroes live on Earth ", heroesOnEarthArray.length);
 
 // 5. Czy to prawda, że wśród bohaterów więcej jest żywych kobiet niż martwych mężczyzn (to z gwiazdką, trochę trudniejsze)
 
 //return true if alive women > dead man
 
-const aliveWomen = characters.filter(e => {
-    if ((e.status.includes("Alive") == true) && (e.gender.includes("Female") == true)) {return e}
-})
-const deadMan = characters.filter(e => {
-    if ((e.status.includes('Dead') == true) && (e.gender.includes("Male") == true)) { return e}
-})
+const aliveWomen = characters.filter(
+  (e) => e.status.includes("Alive") && e.gender.includes("Female")
+);
+const deadMan = characters.filter(
+  (e) => e.status.includes("Dead") && e.gender.includes("Male")
+);
 
-const moreAliveWomanThanManQuestion = e => {
-    if (aliveWomen > deadMan) {return true}
-    else { return false}
-}
+const moreAliveWomanThanManQuestion = (aliveWomen, deadMan) => {
+  // funkcja czysta
+  return aliveWomen > deadMan;
+};
 
-console.log('is more alivie woman than man ?',moreAliveWomanThanManQuestion());
+console.log(
+  "is more alivie woman than man ?",
+  moreAliveWomanThanManQuestion(aliveWomen, deadMan)
+);
 
-// 6. Znajdź bohaterów, którzy wstąpili w jednym odcinku 
+// 6. Znajdź bohaterów, którzy wstąpili w jednym odcinku
 
-const oneEpisodeHero = characters.filter(e => {
-    if (e.episode.length == 1) {return e}
-})
+const oneEpisodeHero = characters.filter((e) => e.episode.length == 1);
 
-console.log('one time episode heros', oneEpisodeHero)
+console.log("one time episode heros", oneEpisodeHero);
 
 // 7. W ilu postaciach wystąpił "Rick"
 
-const findRick = characters.filter(e => {
-    if (e.name.includes("Rick") == true) {return e}
-})
-console.log('how many times rick appear ',findRick.length)
+const findRick = characters.filter((e) => e.name.includes("Rick"));
+console.log("how many times rick appear ", findRick.length);
 
 //8. Stwórz obiekt, opisujący płeć wraz z ilością bohaterów:
 // przykładowa odpowiedź:
@@ -98,26 +93,13 @@ console.log('how many times rick appear ',findRick.length)
 // Male: 5,
 // }
 
-class genderWars {
-    genderAppears(characters, genderType) {
-        const gender = characters.filter(e =>{
-            if (e.gender == genderType) {return e}
-        })
-        return gender.length;
-    }
+const newObject = characters.reduce((acc, cur) => {
+  if (acc[cur.gender]) {
+    acc[cur.gender] += 1;
+  } else {
+    acc[cur.gender] = 1;
+  }
+  return acc;
+}, {});
 
-}
-
-const genderCount = new genderWars ();
-
-const maleCount = genderCount.genderAppears(characters, "Male");
-const femaleCount = genderCount.genderAppears(characters, "Female")
-const unknownCount = genderCount.genderAppears(characters, "unknown")
-
-console.log('female count', femaleCount)
-console.log('male count', maleCount)
-console.log('unknown count', unknownCount)
-
-const newGenderCountObject = {female: femaleCount, male: maleCount, unknown: unknownCount}
-
-console.log(newGenderCountObject)
+console.log(newObject);

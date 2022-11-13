@@ -1,51 +1,53 @@
 // Zad 4.
-// Stwórz funkcję, która będzie odliczała, ile dni zostało do końca bieżącego roku. Skrypt ma automatycznie i na bieżąco wyświetlać komunikat: 
+// Stwórz funkcję, która będzie odliczała, ile dni zostało do końca bieżącego roku. Skrypt ma automatycznie i na bieżąco wyświetlać komunikat:
 // <Do końca roku zostało X dni, Y godzin>
 
+const howMuchDaysLeftInYear = (e) => {
+  // how much days are in current year
 
-const howMuchDaysLeftInYear = e => {
+  const daysInYear = (year) => {
+    return isLeapYear(year) ? 366 : 365;
+  };
+  const isLeapYear = (year) => {
+    return year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
+  };
 
-// how much days are in current year
+  // today date
 
-        const daysInYear = year => { return isLeapYear( year ) ? 366 : 365 };
-        const isLeapYear =  year  => { return year % 400 === 0 || ( year % 100 !== 0 && year % 4 === 0 ) };
+  const todayDate = new Date();
+  const fullYear = todayDate.getFullYear();
 
-    // today date
+  // how much days in current year
 
-        const todayDate = new Date;
-        const fullYear = todayDate.getFullYear();
+  const daysInCurrentYear = daysInYear(fullYear);
 
-    // how much days in current year
+  // count days in year, and show witch day we at
 
-        const daysInCurrentYear = daysInYear(fullYear)
+  const start = new Date(todayDate.getFullYear(), 0, 0);
+  const differ = todayDate - start;
+  const oneDay = 1000 * 60 * 60 * 24;
+  const day = Math.floor(differ / oneDay);
+  // console.log(day)
 
-// count days in year, and show witch day we at
+  // how much days left in current year
 
-        const start = new Date(todayDate.getFullYear(), 0, 0);
-        const differ = todayDate - start;
-        const oneDay = 1000 * 60 * 60 * 24;
-        const day = Math.floor(differ / oneDay);
-        // console.log(day)
+  const howMuchDaysLeft = daysInCurrentYear - day;
+  console.log(howMuchDaysLeft);
 
-// how much days left in current year 
+  // return
+  // howMuchDaysLeft += 1
+  return howMuchDaysLeft;
+};
 
-        const howMuchDaysLeft = daysInCurrentYear - day;
-        console.log(howMuchDaysLeft)
+// console.log(howMuchDaysLeftInYear())
 
-// return
-        // howMuchDaysLeft += 1
-        return howMuchDaysLeft
-    }
+const span = document.querySelector("span");
 
-    // console.log(howMuchDaysLeftInYear())
+const interval = setInterval(function () {
+  span.innerHTML = howMuchDaysLeftInYear();
+}, 1000);
 
-    const span = document.querySelector('span');
-
-    const interval = setInterval(function() { 
-        span.innerHTML = howMuchDaysLeftInYear()
-    },1000)
-
-    const timeout = setTimeout(function() {
-        clearInterval(interval)
-        return console.log('stop interval')
-    },5000)
+const timeout = setTimeout(function () {
+  clearInterval(interval);
+  return console.log("stop interval");
+}, 5000);
