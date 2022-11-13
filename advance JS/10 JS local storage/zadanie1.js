@@ -21,11 +21,25 @@ class UserAccount {
     this.surname = surname;
     this.incomes = new Map();
     this.expenses = new Map();
+
+    const toLocalStorage = {
+      name: this.name,
+      surname: this.surname,
+      // they are empty in localStorage, why ?
+      incomes: JSON.stringify([...this.incomes]),
+      expenses: this.expenses,
+    };
+
+    window.localStorage.setItem(this.name, JSON.stringify(toLocalStorage));
   }
 
   get income() {
     return this.incomes;
   }
+
+  // console() {
+  //   console.log(JSON.stringify([...this.incomes]));
+  // }
 
   countIncomes() {
     let sum = 0;
@@ -61,11 +75,18 @@ class UserAccount {
 }
 
 const Adam = new UserAccount("Adam", "Andrys");
-Adam.addIncome("2020-11-05", 213001010);
-Adam.addExpense("2020-11-10", 18900);
-Adam.addExpense("2020-11-11", 18901);
-Adam.addExpense("2020-11-12", 18902);
-Adam.addExpense("2020-11-13", 18903);
-console.log("ile zarobił Adam", Adam.countIncomes());
-console.log("balans", Adam.accountBalance());
-console.log(Adam);
+
+Adam.addIncome("2020-11-05", 2130);
+Adam.addIncome("2020-11-04", 232);
+Adam.addIncome("2020-12-07", 254);
+
+Adam.addExpense("2020-11-10", 182);
+Adam.addExpense("2020-11-11", 189);
+Adam.addExpense("2020-11-12", 123);
+Adam.addExpense("2020-11-13", 154);
+
+// Adam.console();
+
+// console.log("ile zarobił Adam", Adam.countIncomes());
+// console.log("balans", Adam.accountBalance());
+// console.log(Adam);
