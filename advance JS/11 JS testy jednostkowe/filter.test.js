@@ -12,6 +12,8 @@
 
 import { filterMethodMyFor } from "./filter";
 
+const 
+
 describe("filter", () => {
   it("test", () => {
     expect(2).toStrictEqual(2);
