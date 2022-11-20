@@ -1,0 +1,59 @@
+.background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: antiquewhite;
+  height: 100vh;
+  width: auto;
+}
+#img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -99;
+}
+.card {
+  opacity: 0.9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #313a66;
+  height: 80%;
+  width: 30%;
+  border-radius: 2rem;
+  box-shadow: #0e1531 0px 7px 29px 0px;
+}
+.person {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 4rem;
+}
+#avatar {
+  height: 8rem;
+  width: 8rem;
+  border-radius: 10rem;
+  object-fit: cover;
+}
+.rewards {
+  text-align: center;
+}
+.medals {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 5rem;
+}
+.number {
+  text-align: center;
+}
+.line {
+  border-style: solid;
+  width: 99%;
+  border-width: 1px;
+}
