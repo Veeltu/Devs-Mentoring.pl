@@ -1,0 +1,25 @@
+.list{
+    list-style: none;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap:2rem
+}
+.li{
+    background-color: white;
+    width: 10rem;
+    height: 2rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media only screen and (max-width: 800px ) {
+    .list{
+        display: flex;
+        flex-direction: row;
+    }
+    
+}
