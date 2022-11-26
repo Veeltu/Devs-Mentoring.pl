@@ -1,19 +1,18 @@
 import "./contact.css";
 import Socials from "./socials";
-import Data from "../data";
 
-const Contact = () => {
+const Contact = ({data}) => {
   return (
     <div>
       <div>
         <h2>Contact</h2>
-        <div className="phone">{Data.company.phone} </div>
-        <div className="mail">{Data.company.mail}</div>
+        <div className="phone">{data.phone} </div>
+        <div className="mail">{data.mail}</div>
       </div>
 
       <div>
         <h2>Socials</h2>
-        <Socials />
+        <Socials data={data} />
       </div>
     </div>
   );

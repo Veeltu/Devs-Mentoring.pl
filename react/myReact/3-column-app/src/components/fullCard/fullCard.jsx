@@ -8,7 +8,7 @@ import imgLuxury from "../images/icon-luxury.svg"
 import imgSuvs from '../images/icon-suvs.svg'
 
 
-const FullCard = () => {
+const FullCard = () => { // TODO: Zmienic na map
   const topic = Data.map((e) => e.name)
   const p = Data.map((e) => e.p)
 
