@@ -1,0 +1,36 @@
+h1{
+  font-size: 50px;
+}
+.App{
+  background-color: rgb(60, 55, 68);
+  height: 300px;
+  color: azure;
+  
+}
+.footer{
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+.contact{
+  /* background-color: yellow; */
+  width: 33%;
+}
+.nameLogo{
+  /* background-color: red; */
+  width: 33%;
+}
+.links{
+  /* background-color: blue; */
+  width: 33%;
+    display: flex;
+    flex-direction: column;
+}
+.socials{
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
