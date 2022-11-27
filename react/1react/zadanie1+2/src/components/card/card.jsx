@@ -2,7 +2,7 @@ import React from "react";
 import "./card.css";
 
 const Card = (props) => {
-  const { person } = props
+  const person = props
   return (
     <div className="background">
       <img src={person.backgroundImg} alt="img" id="img" />
