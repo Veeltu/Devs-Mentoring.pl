@@ -1,0 +1,27 @@
+Zad 1
+Stwórz komponent wyświetlający następujące dane, które przekażesz do useState jako initialValue.
+
+const initialData = {
+    human: {
+      sex: "man",
+      surname: "Detic",
+    },
+    accountBalance: 1000,
+  };
+
+Następnie przycisk, który będzie togglować płeć użytkownika (zdarzenie onClick handleSexChange) oraz przyciski do odjęcia 500 od stanu konta (zdarzenie onClick handleBuy) i 500 do dodania do stanu konta (zdarzenie onClick handleSell). Pamiętaj o destrukturyzacji i właściwości prevValue w setState, aby nie zgubić po drodze stanu.
+
+1.jak wyświętlić dane z obiektu w react ?
+    {initialData.human.sex} itd
+2.jak przekazać dane obieku to useState ?
+    const [sex, setSex] = useState("man")
+    const [surname, setSurname] = useState("Detic")
+    const [accountBalance, setAccountBalance] = useState("1000")
+3.toggle onClick - handleSexChange ?
+    const [isActive, setActive] = useState("false");
+
+    const toggle = () => {
+        setActive(!isActive);
+    };
+
+    {isActive ? "man" : "woman"}
