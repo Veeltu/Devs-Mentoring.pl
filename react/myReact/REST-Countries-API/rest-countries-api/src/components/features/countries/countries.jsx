@@ -1,12 +1,12 @@
 import "./countries.css";
 
-const Countries = (props) => {
-  const dataArray = props.data;
+const Countries = ({data}) => {
 
   return (
     <ul className="list">
-      {dataArray.map((e) => (
-        <div className="card">
+      {data.map((e) => (
+        // <CountryCard country={e}/>
+        <div key={e.area} className="card">
           <img className="flag" alt="flag" src={e.flags.png}></img>
           <div className="country-info">
             <div className="name">
