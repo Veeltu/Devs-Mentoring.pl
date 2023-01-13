@@ -32,11 +32,14 @@
 
 
 import './App.css';
+import Table from './components/table';
+import { dataJSON } from './data/data';
 
 function App() {
+  console.log(dataJSON)
   return (
     <>
-      <h1>hi</h1>
+      <Table data = {dataJSON}/>
     </>
   );
 }
