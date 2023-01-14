@@ -1,0 +1,3 @@
+Zad 4
+Stwórz custom hooka, który jako parametry przyjmie link do API oraz zwróci stan isLoading oraz otrzymane dane. Skorzystaj z fetcha.
+
