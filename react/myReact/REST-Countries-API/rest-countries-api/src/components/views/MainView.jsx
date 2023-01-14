@@ -38,7 +38,7 @@ const MainView = () => {
             Europe
           </option>
           {/* <option onClick={() => setContinent()} value="All">
-            All // TODO : how to get filter with all   ====>>>>  try useState(false)
+            All // TODO : how to get filter with all   ====>>>>  useState(false)
           </option> */}
         </select>
       </div>
