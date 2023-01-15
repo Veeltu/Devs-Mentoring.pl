@@ -2,23 +2,23 @@ import { useEffect, useState } from "react";
 
 function useFetch(url) {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null)
- 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    setLoading(true);
-    fetch(url)
+    fetch(`https://api.github.com/users/eunit99/repos`)
       .then((response) => response.json())
-      .then((json) => console.log(json));
-      
-  }, [url])
-//   console.log(data)
+      .then((usefulData) => {
+        //  console.log(usefulData);
+        setLoading(false);
+        setData(usefulData);
+      })
+      .catch((e) => {
+        console.error(`An error occurred: ${e}`);
+      });
+  }, []);
 
-  return (
-    { data, loading }
-    // <h1>{data}</h1>
-
-  )
+  return { data, loading, error };
 }
 
 export default useFetch;

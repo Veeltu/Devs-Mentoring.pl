@@ -9,14 +9,14 @@ function App() {
     "https://jsonplaceholder.typicode.com/users/"
   );
 
-  if (loading) return <h1>LOADING...</h1>;
-
-  console.log(data);
-  console.log(loading);
+  // console.log(loading);
+  // console.log(data);
 
   return (
     <>
       <h1>hi</h1>
+      <code>{JSON.stringify(data)}</code>
+      
     </>
   );
 }
