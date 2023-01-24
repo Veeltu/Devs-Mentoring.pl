@@ -17,14 +17,12 @@ import Modal from './components/Modal/Modal';
 import Button from 'react-bootstrap/Button'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ModalBootstrap from './components/Modal/ModalBootstrap';
+import useHide from './components/useHide';
 
 
 function App() {
-  // hide/show MODAL
-  const [showModal, setShowModal] = useState(false)
-  const openModal = () => {
-    setShowModal(prev => !prev)
-  }
+
+  const [showModal,setShowModal, openModal] = useHide();
 
 
   return (
