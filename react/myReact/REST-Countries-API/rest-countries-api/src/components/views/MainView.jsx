@@ -9,37 +9,31 @@ const MainView = () => {
     3. filter uruchamiany jest tylko wtedy, gdy zmienia sie wybrany kontynent (useEffect)
     TODO: how to filter ALL ?
     */
-
-  const [continent, setContinent] = useState("Asia");
+  const [continents, allContinents] = useState(["Asia", "Americas", "Africa", "Europe"])
+  const [continent, setContinent] = useState("All");
   const [contFilter, setContFilter] = useState([]); //important : this have to be [], for map function
 
   useEffect(() => {
-    const b = countriesData.filter((e) => e.region === continent);
-    setContFilter(b)
-    // console.log(b)
+    let result = countriesData
+    if(continent !== 'All'){
+      result = result.filter((e) => e.region === continent);
+    } 
+    setContFilter(result)
   }, [continent]);
 
   // console.log(contFilter) // works
-
   return (
     <div className="body">
       <div className="container m-5">
-        <select className="custom-select">
-          <option onClick={() => setContinent("Asia")} value="Asia">
-            Asia
+        <select onChange={(e)=> setContinent(e.target.value)} className="custom-select">
+          <option value="All">
+            All
           </option>
-          <option onClick={() => setContinent("Americas")} value="Americas">
-            Americas
-          </option>
-          <option onClick={() => setContinent("Africa")} value="Africa">
-            Africa
-          </option>
-          <option onClick={() => setContinent("Europe")} value="Europe">
-            Europe
-          </option>
-          {/* <option onClick={() => setContinent()} value="All">
-            All // TODO : how to get filter with all   ====>>>>  useState(false)
-          </option> */}
+          {continents.map(e=>(
+              <option key={e} value={e}>
+                {e}
+              </option>
+          ))}
         </select>
       </div>
       <Countries data={contFilter} />

@@ -6,7 +6,8 @@ function useFetch(url) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`https://api.github.com/users/eunit99/repos`)
+    // fetch(`https://api.github.com/users/eunit99/repos`)
+    fetch(url)
       .then((response) => response.json())
       .then((usefulData) => {
         //  console.log(usefulData);

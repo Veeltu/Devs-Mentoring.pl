@@ -3,6 +3,7 @@ import './Modal.css'
 
 function Modal({ showModal, setShowModal }) {
 
+  //todo: put that to custom hook |
   const modalRef = useRef();
 
   const closeModal = (e) => {
@@ -11,7 +12,7 @@ function Modal({ showModal, setShowModal }) {
     }
   };
 
-  return (
+  return ( 
     <>
 
       {showModal ? (

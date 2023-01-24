@@ -2,7 +2,7 @@
 // Stwórz custom hooka, który jako parametry przyjmie link do API oraz zwróci stan isLoading oraz otrzymane dane. Skorzystaj z fetcha.
 
 import "./App.css";
-import useFetch from "./useFetch";
+import useFetch from "./components/useFetch";
 
 function App() {
   const { data, loading } = useFetch(

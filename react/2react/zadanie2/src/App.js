@@ -6,21 +6,20 @@ import "./App.css";
 import Post from "./components/post";
 
 function App() {
-  const [a, setA] = useState();
-  const [b, setB] = useState();
+  const [myState, setMyState] = useState();
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users/")
       .then((response) => response.json())
-      .then((json) => setB(json));
-      console.log("useEffect")
-  }, [a]);
+      .then((json) => setMyState(json));
+    console.log("useEffect");
+    return () => {setMyState([])} // componentWillUnmount
+  }, []); //Runs only on the first render => componentDidMount()
 
   return (
     <>
       <h1>hi</h1>
-      <Post data={b}/>
-      
+      <Post data={myState} />
     </>
   );
 }
