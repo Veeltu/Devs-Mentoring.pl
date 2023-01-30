@@ -22,15 +22,16 @@ import { useState, useEffect } from "react";
 // Surname (nie może być krótszy niż 5 znaków, nie może być liczbą),
 // Email (nie może być czymś innym niż email),
 
+//todo: how fetch data from json  ?
 
 export default function Clients() {
   const [data, setData] = useState([]);
-  const getData = () => {
-    fetch("/clients", {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Accept: "application/json",
-    //   },
+  const getData = () => { // POST(dodaj nowe), PUT(modyfikuj), DELETE(usun), GET => AXIOS
+    fetch("http://localhost:3000/clients", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
     })
       .then(function (response) {
         console.log(response);
@@ -45,12 +46,11 @@ export default function Clients() {
     getData();
   }, []);
 
-  console.log(data);
+  // console.table(data);
 
   return (
     <div>
       <h1>Clients</h1>
-      <code>JSON.stringify({data})</code>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 250 }} size="small" aria-label="a dense table">
           <TableHead>
@@ -61,7 +61,7 @@ export default function Clients() {
               <TableCell align="right">email</TableCell>
             </TableRow>
           </TableHead>
-          {/* <TableBody>
+           <TableBody>
             {data.map((row) => (
               <TableRow
                 key={row.id}
@@ -74,7 +74,7 @@ export default function Clients() {
                 <TableCell align="right">{row.email}</TableCell>
               </TableRow>
             ))}
-          </TableBody> */}
+          </TableBody>
         </Table>
       </TableContainer>
     </div>
