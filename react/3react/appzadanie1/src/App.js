@@ -25,6 +25,13 @@ function App() {
               clients
             </Link>
           </Button>
+
+          <Button variant="contained">
+            <Link to="/form" style={{ color: "white" }}>
+              form
+            </Link>
+          </Button>
+
         </Stack>
       </div>
 
@@ -34,7 +41,7 @@ function App() {
           <Route path="/" element={""} />
           <Route path="/orders" element={<Orders />}></Route>
           <Route path="/clients" element={<Clients />}></Route>
-          <Route path="/form" element={<Form/>}></Route>
+          <Route path="/form" element={<Form />}></Route>
         </Routes>
       </div>
     </>
