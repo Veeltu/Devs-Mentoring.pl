@@ -12,6 +12,8 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 
 import { useState, useEffect } from "react";
 
+import Form from "../Form/form";
+
 // ZADANIE :
 
 // 1. Clients, która:
@@ -52,6 +54,7 @@ export default function Clients() {
     getData();
   }, []);
 
+
   // Remove element from list onclick
   const [clients, setClients] = useState([]);
 
@@ -60,16 +63,23 @@ export default function Clients() {
     setClients(newClients);
   };
 
+  // reset list
+
   const resetList = () => {
     setClients(data);
   };
 
+  // pull data from Form.js
+  const pull_data = (data) => {
+    console.log(data); // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
+  }
+
   return (
     <div>
       <h1>Clients</h1>
+
       <Button
         variant="outlined"
-        // startIcon={<RefreshIcon />}
         children={<RefreshIcon />}
         onClick={resetList}
       />
@@ -100,11 +110,19 @@ export default function Clients() {
                     onClick={() => removeElement(row.id)}
                   ></Button>
                 </TableCell>
+                <TableCell align="left">
+                  <Button
+                    variant="outlined"
+                    children={<DeleteIcon />}
+                    onClick={() => removeElement(row.id)}
+                  ></Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      <Form func={pull_data}/>
     </div>
   );
 }
