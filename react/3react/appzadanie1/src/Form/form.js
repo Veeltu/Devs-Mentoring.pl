@@ -3,13 +3,16 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
 
-const Form = () => {
-  const [formData, setFormData] = useState([]);
+const Form = (props) => {
+  const [newClient, setNewClient] = useState([]);
 
   const handleFormSubmit = (values) => {
-    setFormData(values);
+    setNewClient(values);
   };
-  console.log(formData)
+  // console.log(newClient)
+  
+  props.func(newClient)
+
 
   return ( 
     <Box m="20px">
@@ -17,6 +20,7 @@ const Form = () => {
 
       <Formik
         onSubmit={handleFormSubmit}
+        // onSubmit={submit}
         initialValues={initialValues}
         validationSchema={checkoutSchema}
       >
