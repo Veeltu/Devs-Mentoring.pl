@@ -1,0 +1,35 @@
+axios.get("http://localhost:3000") dont work. no idea why.
+
+axios.post("/clients") dont work. 
+    POST http://localhost:3001/clients 404 (not found)
+
+axios.post('http://localhost:3000/clients')
+    POST http://localhost:3000/clients 500 (Internal Server Error)
+
+reason ?
+
+axios connect with wrong api, so :
+    axios.defaults.baseURL = 'http://localhost:3000';
+
+then - work , but :
+    POST http://localhost:3000/clients 500 (Internal Server Error)
+
+reason ?
+
+//////////////////////////////////////
+
+deleteRow
+
+ deleteRow(id, e){  
+    axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)  
+      .then(res => {  
+        console.log(res);  
+        console.log(res.data);  
+    
+        const posts = this.state.posts.filter(item => item.id !== id);  
+        this.setState({ posts });  
+      })  
+
+  <button className="btn btn-danger" onClick={(e) => this.deleteRow(post.id, e)}>Delete</button>  
+
+//////////////////////////////////////////////////////////////

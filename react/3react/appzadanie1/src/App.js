@@ -26,11 +26,6 @@ function App() {
             </Link>
           </Button>
 
-          <Button variant="contained">
-            <Link to="/form" style={{ color: "white" }}>
-              form
-            </Link>
-          </Button>
 
         </Stack>
       </div>

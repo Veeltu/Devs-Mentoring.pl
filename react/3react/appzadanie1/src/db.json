@@ -1,7 +1,15 @@
 {
   "order": [
-    { "id": 123, "order-details": "coca-cola *2", "isReady": false },
-    { "id": 124, "order-details": "pepsi *2", "isReady": false }
+    {
+      "id": 123,
+      "order-details": "coca-cola *2",
+      "isReady": false
+    },
+    {
+      "id": 124,
+      "order-details": "pepsi *2",
+      "isReady": false
+    }
   ],
   "clients": [
     {
