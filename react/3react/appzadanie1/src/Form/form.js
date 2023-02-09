@@ -1,102 +1,103 @@
-import { Box, Button, TextField } from "@mui/material";
-import { Formik } from "formik";
-import * as yup from "yup";
-import { useState } from "react";
+import { Box, Button } from "@mui/material";
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
-const Form = (props) => {
-  const [newClient, setNewClient] = useState([]);
+import axios from "axios";
+const url = "http://localhost:3000/clients";
 
-  const handleFormSubmit = (values) => {
-    setNewClient(values);
-  };
-  // console.log(newClient)
-  
-  props.func(newClient)
+const SignupForm = ({ refresh }) => {
+  //form
+  const formik = useFormik({
+    initialValues: {
+      id: "",
+      name: "",
+      surname: "",
+      email: "",
+    },
 
+    //validation
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .max(15, "Must be 15 characters or less")
+        .required("Required"),
+      surname: Yup.string()
+        .max(20, "Must be 20 characters or less")
+        .required("Required"),
+      email: Yup.string().email("Invalid email address").required("Required"),
+    }),
 
-  return ( 
+    //submit
+    onSubmit: (values) => {
+      //   alert(JSON.stringify(values, null, 2));
+      const handle = async (e) => {
+        try {
+          const resp = await axios.post(url, values, null, 2);
+          refresh();
+          console.log(resp);
+          console.log(resp.data);
+        } catch (error) {
+          console.log(error.resp);
+        }
+      };
+      handle(values);
+    },
+  });
+
+  return (
     <Box m="20px">
-      <h1>header</h1>
+      <form onSubmit={formik.handleSubmit}>
+        <Box display="grid" gap="10px">
+          <label htmlFor="name">First Name</label>
 
-      <Formik
-        onSubmit={handleFormSubmit}
-        // onSubmit={submit}
-        initialValues={initialValues}
-        validationSchema={checkoutSchema}
-      >
-        {({
-          values,
-          errors,
-          touched,
-          handleBlur,
-          handleChange,
-          handleSubmit,
-        }) => (
-          <form onSubmit={handleSubmit}>
-            <Box display="grid" gap="30px">
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.name}
-                name="name"
-                error={!!touched.name && !!errors.name}
-                helperText={touched.name && errors.name}
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="surname"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.surname}
-                name="surname"
-                error={!!touched.surname && !!errors.surname}
-                helperText={touched.surname && errors.surname}
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Email"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.email}
-                name="email"
-                error={!!touched.email && !!errors.email}
-                helperText={touched.email && errors.email}
-                sx={{ gridColumn: "span 4" }}
-              />
-            </Box>
-            <Box display="flex" justifyContent="end" mt="20px">
-              <Button type="submit" color="secondary" variant="contained">
-                Create New User
-              </Button>
-            </Box>
-          </form>
-        )}
-      </Formik>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.name}
+          />
+
+          {formik.touched.name && formik.errors.name ? (
+            <div>{formik.errors.name}</div>
+          ) : null}
+
+          <label htmlFor="surname">Last Name</label>
+          <input
+            id="surname"
+            name="surname"
+            type="text"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.surname}
+          />
+
+          {formik.touched.surname && formik.errors.surname ? (
+            <div>{formik.errors.surname}</div>
+          ) : null}
+
+          <label htmlFor="email">Email Address</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+          />
+
+          {formik.touched.email && formik.errors.email ? (
+            <div>{formik.errors.email}</div>
+          ) : null}
+        </Box>
+
+        <Button variant="contained" type="submit">
+          Submit
+        </Button>
+      </form>
     </Box>
   );
 };
 
-const checkoutSchema = yup.object().shape({
-  name: yup.string().required("required"),
-  surname: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-});
-
-const initialValues = {
-  id: "",
-  name: "",
-  surname: "",
-  email: "",
-};
-
-export default Form;
+export default SignupForm;

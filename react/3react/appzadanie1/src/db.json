@@ -19,16 +19,10 @@
       "email": "mymail@gmail.com"
     },
     {
-      "id": 2,
-      "name": "Jarek",
-      "surname": "Jochemczyk",
-      "email": "mymail@gmail.com"
-    },
-    {
-      "id": 3,
-      "name": "Zbyszek",
-      "surname": "Jochemczyk",
-      "email": "mymail@gmail.com"
+      "id": 4,
+      "name": "qwe",
+      "surname": "qwe",
+      "email": "eqwe@daw.dwa"
     }
   ]
 }
