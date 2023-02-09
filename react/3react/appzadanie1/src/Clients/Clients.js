@@ -9,126 +9,110 @@ import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import EditIcon from "@mui/icons-material/Edit";
+import AddIcon from '@mui/icons-material/Add';
 
 import { useState, useEffect } from "react";
 
-import Form from "../Form/form";
+import SignupForm from "../Form/form";
 import axios from "axios";
+import { useParams } from "react-router";
+const url = "http://localhost:3000/clients";
+
+import { useFormik } from "formik";
 
 // ZADANIE :
 // 1. Clients, która:
 //OK     Wyświetli na stronie wszystkich klientów,
 //OK     Umożliwi usuwanie klienta,
 //     Umożliwi edycję klienta,
-//     Formularz do dodawania klienta,
+//OK    Formularz do dodawania klienta,
 
 export default function Clients() {
-  const api = axios.create({
-    baseURL: "http://localhost:3000/clients",
-  });
-
-  // Get data
+  const { id } = useParams();
+  // data
   const [jsonData, setJsonData] = useState([]);
+  const [newClientTo, setNewClientTo] = useState([]);
 
-  // console.log(jsonData)
-
-  useEffect(() => {
-    const getData = () => {
-      api.get("/").then((res) => {
-        // console.log(res.data);
-        setJsonData(res.data);
-      });
-    };
-    getData();
-  }, []);
-
-  const newData = {
-    id: "12",
-    name: "Adamadwa",
-    surname: "dwasdw",
-    email: "mymaawWW@gmail.com",
-  };
-
-  //todo: why error 500 ?
-  // const createCourse = async () => {
-  //   let res = await api.post(
-  //     "/",
-  //     newData
-  //     )
-  //   console.log(res);
-  // }
-
-  const createCourse = async () => {
-    let res = await api
-      .post("/", {
+  //fetch data
+  const getData = async () => {
+    try {
+      const resp = await axios.get(url, {
         headers: {
-          "Content-Type": "application/json",
           Accept: "application/json",
         },
-        newData,
-      })
-      .catch(function (error) {
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          // console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log("Error", error.message);
-        }
-        console.log(error.config);
       });
+      setJsonData(resp.data);
+    } catch (error) {
+      console.log(error.data);
+    }
   };
-  createCourse();
+  useEffect(() => {
+    getData();
+  }, [newClientTo]); // this dont read, dont need it 
 
-  // try {
-  //   let result = await axios.post(          // any call like get
-  //     "http://localhost:3001/user",         // your URL
-  //     {                                     // data if post, put
-  //       some: "data",
-  //     }
-  //   );
-  //   console.log(result.response.data);
-  // } catch (error) {
-  //   console.error(error.response.data);     // NOTE - use "error.response.data` (not "error")
-  // }
+  //delete client function
+  const deleteClient = async (id) => {
+    await axios.delete(`http://localhost:3000/clients/${id}`);
+    getData();
+  };
 
-  //how to delete ?
-  // const deleteClient = async () => {
-  //   let res = await api.delete("/", newData)
-  //   console.log(res)
-  // }
-  const deleteRow = async (id, e) => {
-    await axios.delete("http://localhost:3000/clients/${id}").then((res) => {
-      console.log(res);
-      console.log(res.data);
+  // add to list random client **for testing**
+  const resetList = async (e) => {
+    e.preventDefault();
+    try {
+      const resp = await axios.post(url, {
+        id: "",
+        name: "Adam",
+        surname: "Jochemczyk",
+        email: "mymail@gmail.com",
+      });
+      getData();
+    } catch (error) {
+      console.log(error.resp);
+    }
+  };
 
-      const posts = jsonData.filter((item) => item.id !== id);
-      setJsonData(posts);
+  // toggle add to list json newClient
+  const [isOpened, setIsOpened] = useState(false);
+
+  function toggle() {
+    setIsOpened((wasOpened) => !wasOpened);
+  }
+
+  //axios put // how to edit ? ok sooo.... I need put his in form.js ?
+  // orrr import another form.js and change params ?
+  //to do :
+  // 1. open form with data
+  const changeClient = async (e) => {
+    await axios.put(`http://localhost:3000/clients/${id}`, {
+      id: "",
+      name: "{id.name}",
+      surname: "Jochemczyk",
+      email: "mymail@gmail.com",
     });
-  };
-
-  // pull data from Form.js
-  const pull_data = (data) => {
-    // console.log(data); // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
-  };
+  }
 
   return (
     <div>
       <h1>Clients</h1>
 
-      {/* <Button
+      <Button
         variant="outlined"
         children={<RefreshIcon />}
         onClick={resetList}
-      /> */}
+      />
+
+      <Button
+        variant="outlined"
+        children={<AddIcon />}
+        onClick={toggle}
+      />
+      {isOpened && (
+        <SignupForm refresh={getData} />
+      )}
+
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 250 }} size="small" aria-label="a dense table">
           <TableHead>
@@ -140,7 +124,7 @@ export default function Clients() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {jsonData.map((row, id) => (
+            {jsonData.map((row) => (
               <TableRow
                 key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -154,8 +138,13 @@ export default function Clients() {
                   <Button
                     variant="outlined"
                     children={<DeleteIcon />}
-                    // onClick={() => removeElement(row.id)}
-                    onClick={(e) => deleteRow(jsonData.id, e)}
+                    onClick={() => deleteClient(row.id)}
+                  ></Button>
+
+                  <Button
+                    variant="outlined"
+                    children={<EditIcon />}
+                    // onClick={''}
                   ></Button>
                 </TableCell>
               </TableRow>
@@ -163,7 +152,6 @@ export default function Clients() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Form func={pull_data} />
     </div>
   );
 }
