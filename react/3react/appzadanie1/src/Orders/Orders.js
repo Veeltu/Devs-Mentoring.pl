@@ -10,7 +10,6 @@
 import * as React from "react";
 import AddNewOrder from "./Form/addOrderForm.js"
 
-
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -25,17 +24,15 @@ import Button from "@mui/material/Button";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import AddIcon from "@mui/icons-material/Add";
 
+import ControlledCheckbox from "./checkbox.js";
+
 import { useState, useEffect } from "react";
 
 import axios from "axios";
-// import { useParams } from "react-router";
 
-// import CloseIcon from "@mui/icons-material/Close";
-// import { Icon } from "@mui/material";
 const url = "http://localhost:3000/order";
 
 function Orders() {
-  // const { id } = useParams();
   // data
   const [jsonData, setJsonData] = useState([]);
 
@@ -83,7 +80,7 @@ function Orders() {
   function toggleAdd() {
     setIsOpened((wasOpened) => !wasOpened);
   }
-  
+
   return (
     <div>
       <h1>Orders</h1>
@@ -92,9 +89,9 @@ function Orders() {
         children={<RefreshIcon />}
         onClick={resetList}
       />
-      <Button variant="outlined" children={<AddIcon />} onClick={toggleAdd} />
+      <Button variant="outlined" children={<AddIcon />}  onClick={toggleAdd} />
       {isOpened && (
-        <AddNewOrder refresh={getData}/>
+        <AddNewOrder toggle={toggleAdd} refresh={getData}/>
       )}
 
 
@@ -113,7 +110,13 @@ function Orders() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell align="center">{row.order}</TableCell>
-                <TableCell align="center">{row.isReady}</TableCell>
+                {/* <TableCell align="center">{row.isReady}</TableCell> */}
+                <TableCell align="center">
+                  <ControlledCheckbox 
+                  row={row}
+                  refresh={getData}
+                  />
+                  </TableCell>
 
                 <TableCell align="center">
                   <Button

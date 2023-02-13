@@ -5,10 +5,13 @@ import * as Yup from "yup";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Unstable_Grid2";
 
+import CloseIcon from '@mui/icons-material/Close';
+import { Icon } from '@mui/material';
+
 import axios from "axios";
 const url = "http://localhost:3000/clients/";
 
-const EditForm = ({ newClientEdit, refresh }) => {
+const EditForm = ({ newClientEdit, refresh, toggle }) => {
   const formik = useFormik({
     initialValues: {
       id: newClientEdit.id,
@@ -45,8 +48,6 @@ const EditForm = ({ newClientEdit, refresh }) => {
       handle(values);
     },
   });
-
-  
 
   return (
     <Grid
@@ -123,6 +124,12 @@ const EditForm = ({ newClientEdit, refresh }) => {
           <Button variant="contained" type="submit">
             Submit
           </Button>
+          <Icon
+                    fontSizeSmall
+                    children={<CloseIcon />}
+                    onClick={toggle}
+                    sx={{position: "absolute", top:"20px", right:"20px",cursor: "pointer"}}
+                  ></Icon>
         </form>
       </Box>
     </Grid>

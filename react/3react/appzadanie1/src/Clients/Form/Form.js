@@ -12,7 +12,7 @@ import { Icon } from '@mui/material';
 import axios from "axios";
 const url = "http://localhost:3000/clients";
 
-const SignupForm = ({ refresh }) => {
+const SignupForm = ({ refresh, toggle }) => {
   //form
   const formik = useFormik({
     initialValues: {
@@ -127,11 +127,12 @@ const SignupForm = ({ refresh }) => {
                     sx={{position: "absolute", top:"20px", right:"20px"}}
                     // onClick={() => deleteClient(row.id)}
                   ></Button> */}
-                  {/* <Icon
+                  <Icon
                     fontSizeSmall
                     children={<CloseIcon />}
+                    onClick={toggle}
                     sx={{position: "absolute", top:"20px", right:"20px",cursor: "pointer"}}
-                  ></Icon> */}
+                  ></Icon>
       </Box>
     </Grid>
   );

@@ -72,13 +72,18 @@ export default function Clients() {
   };
 
   // toggle add to list json newClient
-  const [isOpened, setIsOpened] = useState(false);
+  const [isOpened, setIsOpened] = useState(null);
 
   function toggleAdd() {
     setIsOpened((wasOpened) => !wasOpened);
   }
   //toggle edit list
   const [editRow, setEditRow] = useState(null);
+
+  function toggleEdit() {
+    setEditRow((editRow) => !editRow);
+  }
+
 
   return (
     <div>
@@ -92,7 +97,7 @@ export default function Clients() {
 
       <Button variant="outlined" children={<AddIcon />} onClick={toggleAdd} />
       {isOpened && (
-        <SignupForm refresh={getData}/>
+        <SignupForm refresh={getData} toggle={toggleAdd}/>
       )}
 
       <TableContainer component={Paper}>
@@ -133,7 +138,7 @@ export default function Clients() {
                 </TableCell>
 
                 {editRow === row && (
-                  <EditForm newClientEdit={editRow} refresh={getData} />
+                  <EditForm newClientEdit={editRow} toggle={ toggleEdit} refresh={getData} />
                 )}
               </TableRow>
             ))}

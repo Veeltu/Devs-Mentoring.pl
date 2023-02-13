@@ -6,19 +6,19 @@ import Grid from "@mui/material/Unstable_Grid2";
 
 // import Paper from "@mui/material/Paper";
 import Card from "@mui/material/Card";
-// import CloseIcon from '@mui/icons-material/Close';
-// import { Icon } from '@mui/material';
+import CloseIcon from "@mui/icons-material/Close";
+import { Icon } from "@mui/material";
 
 import axios from "axios";
 const url = "http://localhost:3000/order";
 
-const AddNewOrder = ({ refresh }) => {
+const AddNewOrder = ({ refresh, toggle }) => {
   //form
   const formik = useFormik({
     initialValues: {
-        id: "",
-        order: "",
-        isReady: "",
+      id: "",
+      order: "",
+      isReady: false,
     },
 
     //validation
@@ -31,7 +31,6 @@ const AddNewOrder = ({ refresh }) => {
 
     //submit
     onSubmit: (values) => {
-      //   alert(JSON.stringify(values, null, 2));
       const handle = async (e) => {
         try {
           const resp = await axios.post(url, values, null, 2);
@@ -53,7 +52,6 @@ const AddNewOrder = ({ refresh }) => {
         display: "flex",
         justifyContent: "center",
         alignContent: "center",
-        
       }}
     >
       <Box
@@ -63,7 +61,7 @@ const AddNewOrder = ({ refresh }) => {
           padding: "20px",
           position: "absolute",
           minWidth: 350,
-          zIndex: "99"
+          zIndex: "99",
         }}
       >
         <form onSubmit={formik.handleSubmit}>
@@ -84,26 +82,24 @@ const AddNewOrder = ({ refresh }) => {
             ) : null}
 
             <label htmlFor="isReady">isReady</label>
-            <input
-              id="isReady"
-              name="isReady"
-              type="text"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.isReady}
-            />
-
-            {formik.touched.isReady && formik.errors.isReady ? (
-              <div>{formik.errors.isReady}</div>
-            ) : null}
-
           </Box>
 
           <Button variant="contained" type="submit">
             Submit
           </Button>
+
+          <Icon
+            children={<CloseIcon />}
+            onClick={toggle}
+            sx={{
+              position: "absolute",
+              top: "20px",
+              right: "20px",
+              cursor: "pointer",
+            }}
+          ></Icon>
+
         </form>
-     
       </Box>
     </Grid>
   );
