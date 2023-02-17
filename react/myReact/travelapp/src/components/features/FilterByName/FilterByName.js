@@ -1,24 +1,8 @@
-import { useState } from "react";
 
-function FilterByName({ data }) {
-  //search input
-  const [inputText, setInputText] = useState([]);
-  console.log(inputText);
 
-  // name: Object { common: "Iceland", official: "Iceland", nativeName: {…} }
-
-  const fiteredData = data.filter((e) => {
-    // if no input return orignal
-    if (inputText === "") {
-      return e;
-    }
-    //return the item which contains the user input
-    else {
-      return e.name.common.toLowerCase().includes(inputText);
-    }
-  });
-  console.log(fiteredData); // WORKS !
-
+function FilterByName({ setInputText }) {
+  
+  
   return (
     <div>
       <div className="relative block ">
@@ -27,6 +11,7 @@ function FilterByName({ data }) {
           placeholder="Search for anything..."
           name="search"
           id="id"
+          type="text"
           onChange={(e) => setInputText(e.target.value.toLowerCase())}
         />
       </div>
