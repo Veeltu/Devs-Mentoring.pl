@@ -1,8 +1,4 @@
-
-
 function FilterByName({ setInputText }) {
-  
-  
   return (
     <div>
       <div className="relative block ">
@@ -15,7 +11,6 @@ function FilterByName({ setInputText }) {
           onChange={(e) => setInputText(e.target.value.toLowerCase())}
         />
       </div>
-     
     </div>
   );
 }

@@ -1,21 +1,20 @@
 import { v4 as uuidv4 } from "uuid";
-import { useState } from "react";
 
-const CountriesCard = ({ data }) => {
-  // const [detail, setDetail] = useState([]);
-
-  // console.log(detail)
-  // const handleClick = (e) => {
-  //   const a = e.target;
-  //   setDetail(a);
-  // };
+const CountriesCard = ({ data, setDetail }) => {
+  const handleDetailsClick = (e) => {
+    console.log(e);
+    const a = e.currentTarget.dataset.id;
+    console.log(a);
+    setDetail(a);
+  };
 
   return (
     <ul className="grid grid-flow-row gap-8 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {data.map((e) => (
         <div
-          // onClick={handleClick}
-          key={uuidv4()}
+          onClick={(e) => handleDetailsClick(e)}
+          key={e.name.common}
+          data-id={e.name.common}
           className="my-8 rounded shadow-lg shadow-gray-200 dark:shadow-gray-900 bg-white dark:bg-gray-800 duration-300 hover:-translate-y-1"
         >
           <img

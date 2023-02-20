@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import CountriesCards from "../CountriesCards/CountreisCards";
 import FilterByName from "../FilterByName/FilterByName";
 import FilterByContinent from "../FilterByContinent/FilterByContinent";
+import CountriesDetails from "../CountriesDetails/CountriesDetails";
 
 const url = "https://restcountries.com/v3.1/";
 
@@ -11,14 +12,11 @@ function CountriesGrid() {
   const [continent, setContinent] = useState("All");
   const [contFilter, setContFilter] = useState([]);
   const [inputText, setInputText] = useState("");
-  // console.log(inputText);
   const [detail, setDetail] = useState([]);
+  const [detailCountry, setDetailCountry] = useState([]);
 
-  console.log(detail);
-  const handleClick = (e) => {
-    const a = e.target.value;
-    setDetail(a);
-  };
+  console.log(`detail - ${detail}`);
+  console.log(`detailCountry - ${JSON.stringify(detailCountry)}`);
 
   //fetch data
   useEffect(() => {
@@ -34,6 +32,15 @@ function CountriesGrid() {
     getData();
   }, []);
 
+  //filter for detail one country card
+  useEffect(() => {
+    let detailData = []; // starts empty
+    if (detail !== []) {
+      detailData = jsonData.filter((e) => e.name.common === detail);
+    }
+    setDetailCountry(detailData);
+  }, [detail]);
+
   //continent filter
   useEffect(() => {
     let result = jsonData;
@@ -45,15 +52,8 @@ function CountriesGrid() {
 
   //name filter
   useEffect(() => {
-    const filteredData = contFilter.filter((e) => {
-      // if no input return orignal
-      if (inputText === " ") {
-        return e;
-      }
-      //return the item which contains the user input
-      else {
-        return e.name.common.toLowerCase().includes(inputText);
-      }
+    const filteredData = jsonData.filter((e) => {
+      return e.name.common.toLowerCase().includes(inputText);
     });
     setContFilter(filteredData);
   }, [inputText]);
@@ -64,7 +64,11 @@ function CountriesGrid() {
         <FilterByName setInputText={setInputText} />
         <FilterByContinent setContinent={setContinent} continent={continent} />
       </div>
-      <CountriesCards onClick={handleClick} data={contFilter} />
+      <div className="cursor-pointer">
+        <CountriesCards data={contFilter} setDetail={setDetail} />
+        {/* <CountriesDetails data={detailCountry}/> */}
+      </div>
+      //{" "}
     </div>
   );
 }
