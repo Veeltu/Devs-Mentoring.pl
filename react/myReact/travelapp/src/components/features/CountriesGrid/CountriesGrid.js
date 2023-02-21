@@ -12,11 +12,11 @@ function CountriesGrid() {
   const [continent, setContinent] = useState("All");
   const [contFilter, setContFilter] = useState([]);
   const [inputText, setInputText] = useState("");
-  const [detail, setDetail] = useState([]);
+  const [detail, setDetail] = useState();
   const [detailCountry, setDetailCountry] = useState([]);
+  const [detailView, setDetailView] = useState(false);
 
-  // console.log(`detail - ${detail}`);
-  // console.log(`detailCountry - ${JSON.stringify(detailCountry)}`);
+  console.log(`detail - ${detail}`);
 
   //fetch data
   useEffect(() => {
@@ -38,6 +38,7 @@ function CountriesGrid() {
     if (detail !== [])
       detailData = jsonData.filter((e) => e.name.common === detail);
     setDetailCountry(detailData);
+    setDetailView((wasOpened) => !wasOpened);
   }, [detail]);
 
   //continent filter
@@ -56,22 +57,35 @@ function CountriesGrid() {
     setContFilter(filteredData);
   }, [inputText]);
 
+  const button =(e) => {
+    // setDetail(null); // kiedy zmienia sie detail odpala sie filter z setDetail/ sposób na celearowanie state bez odpalania useEffect ?
+    setDetailView((wasOpened) => !wasOpened);
+
+  }
+
   return (
     <>
-      <div className="bg-gray-100 dark:bg-gray-900 py-10 px-12">
-        <div className="flex justify-between">
-          <FilterByName setInputText={setInputText} />
-          <FilterByContinent
-            setContinent={setContinent}
-            continent={continent}
-          />
-        </div>
-        <div className="cursor-pointer">
-          <CountriesCards data={contFilter} setDetail={setDetail} />
-          {/* <CountriesDetails data={detailCountry} to="/countries-details" /> */}
-        </div>
+      <div className="px-12 py-10 bg-gray-100 dark:bg-BackgroundDarkBlue">
+        {detailView ? (
+          <>
+            <div className="flex justify-between">
+              <FilterByName setInputText={setInputText} />
+              <FilterByContinent
+                setContinent={setContinent}
+                continent={continent}
+              />
+            </div>
+            <div className="cursor-pointer">
+              <CountriesCards data={contFilter} setDetail={setDetail} />
+            </div>
+          </>
+        ) : (
+          <>
+          <CountriesDetails data={detailCountry} />
+          <button onClick={button} style={{height:"20px", color:"white"}}>GETBACK </button>
+          </>
+        )}
       </div>
-
     </>
   );
 }

@@ -4,8 +4,8 @@ import UpperTab from "../features/UpperTab/UpperTab";
 function MainView() {
   return (
     <div className="">
-      <UpperTab /> // dark/light mode
-      <CountriesGrid/> // with filtrs
+      <UpperTab /> 
+      <CountriesGrid/> 
     </div>
   );
 }

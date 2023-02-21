@@ -1,6 +1,3 @@
-// import CountriesDetails from "../CountriesDetails/CountriesDetails";
-
-
 const CountriesCard = ({ data, setDetail }) => {
   const handleDetailsClick = (e) => {
     const a = e.currentTarget.dataset.id;
@@ -15,15 +12,14 @@ const CountriesCard = ({ data, setDetail }) => {
             onClick={(e) => handleDetailsClick(e)}
             key={e.name.common}
             data-id={e.name.common}
-            className="my-8 rounded shadow-lg shadow-gray-200 dark:shadow-gray-900 bg-white dark:bg-gray-800 duration-300 hover:-translate-y-1"
-            // to="/countries-details"
+            className="my-8 duration-300 bg-white rounded shadow-lg shadow-gray-200 dark:shadow-gray-900 dark:bg-gray-800 hover:-translate-y-1"
           >
             <img
-              className="rounded-t h-72 w-full object-cover"
+              className="object-cover w-full rounded-t h-72"
               alt="flag"
               src={e.flags.png}
             ></img>
-            <div className="text-lg mb-4 font-bold leading-relaxed text-gray-800 dark:text-gray-300">
+            <div className="mb-4 text-lg font-bold leading-relaxed text-gray-800 dark:text-gray-300">
               <h2>{Object.values(e.name)[0]}</h2>
             </div>
             <div className="leading-5 text-gray-500 dark:text-gray-400">
