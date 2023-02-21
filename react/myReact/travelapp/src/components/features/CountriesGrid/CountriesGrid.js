@@ -15,8 +15,8 @@ function CountriesGrid() {
   const [detail, setDetail] = useState([]);
   const [detailCountry, setDetailCountry] = useState([]);
 
-  console.log(`detail - ${detail}`);
-  console.log(`detailCountry - ${JSON.stringify(detailCountry)}`);
+  // console.log(`detail - ${detail}`);
+  // console.log(`detailCountry - ${JSON.stringify(detailCountry)}`);
 
   //fetch data
   useEffect(() => {
@@ -35,18 +35,16 @@ function CountriesGrid() {
   //filter for detail one country card
   useEffect(() => {
     let detailData = []; // starts empty
-    if (detail !== []) {
+    if (detail !== [])
       detailData = jsonData.filter((e) => e.name.common === detail);
-    }
     setDetailCountry(detailData);
   }, [detail]);
 
   //continent filter
   useEffect(() => {
     let result = jsonData;
-    if (continent !== "All") {
+    if (continent !== "All")
       result = result.filter((e) => e.region === continent);
-    }
     setContFilter(result);
   }, [continent]);
 
@@ -59,17 +57,22 @@ function CountriesGrid() {
   }, [inputText]);
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 py-10 px-12">
-      <div className="flex justify-between">
-        <FilterByName setInputText={setInputText} />
-        <FilterByContinent setContinent={setContinent} continent={continent} />
+    <>
+      <div className="bg-gray-100 dark:bg-gray-900 py-10 px-12">
+        <div className="flex justify-between">
+          <FilterByName setInputText={setInputText} />
+          <FilterByContinent
+            setContinent={setContinent}
+            continent={continent}
+          />
+        </div>
+        <div className="cursor-pointer">
+          <CountriesCards data={contFilter} setDetail={setDetail} />
+          {/* <CountriesDetails data={detailCountry} to="/countries-details" /> */}
+        </div>
       </div>
-      <div className="cursor-pointer">
-        <CountriesCards data={contFilter} setDetail={setDetail} />
-        {/* <CountriesDetails data={detailCountry}/> */}
-      </div>
-      //{" "}
-    </div>
+
+    </>
   );
 }
 
