@@ -9,14 +9,17 @@ const url = "https://restcountries.com/v3.1/";
 
 function CountriesGrid() {
   const [jsonData, setJsonData] = useState([]);
-  const [continent, setContinent] = useState("All");
-  const [contFilter, setContFilter] = useState([]);
-  const [inputText, setInputText] = useState("");
-  const [detail, setDetail] = useState();
-  const [detailCountry, setDetailCountry] = useState([]);
-  const [detailView, setDetailView] = useState(false);
+  const [filterByContinent, setFilterByContinent] = useState("All");
+  const [inputTextToFilter, setInputTextToFilter] = useState("");
+  const [finalFilerToCardsGrid, setFilterToCardsGrid] = useState([]);
 
-  console.log(`detail - ${detail}`);
+  const [
+    nameToFilterToGetDataForDetailPage,
+    setnameToFilterToGetDataForDetailPage,
+  ] = useState();
+
+  const [dataForDetailPage, setDataForDetailPage] = useState([]);
+  const [detailPageView, setDetailPageView] = useState(false);
 
   //fetch data
   useEffect(() => {
@@ -24,7 +27,7 @@ function CountriesGrid() {
       try {
         const resp = await axios.get(url + "all");
         setJsonData(resp.data);
-        setContFilter(resp.data);
+        setFilterToCardsGrid(resp.data);
       } catch (error) {
         console.log(error.data);
       }
@@ -32,57 +35,62 @@ function CountriesGrid() {
     getData();
   }, []);
 
-  //filter for detail one country card
+  //filter for one country match with "nameToFilterToGetDataForDetailPage"
   useEffect(() => {
     let detailData = []; // starts empty
-    if (detail !== [])
-      detailData = jsonData.filter((e) => e.name.common === detail);
-    setDetailCountry(detailData);
-    setDetailView((wasOpened) => !wasOpened);
-  }, [detail]);
+    if (nameToFilterToGetDataForDetailPage !== [])
+      detailData = jsonData.filter(
+        (e) => e.name.common === nameToFilterToGetDataForDetailPage
+      );
+    setDataForDetailPage(detailData);
+    setDetailPageView((wasOpened) => !wasOpened);
+  }, [nameToFilterToGetDataForDetailPage]);
 
-  //continent filter
+  //filterByContinent
   useEffect(() => {
     let result = jsonData;
-    if (continent !== "All")
-      result = result.filter((e) => e.region === continent);
-    setContFilter(result);
-  }, [continent]);
+    if (filterByContinent !== "All")
+      result = result.filter((e) => e.region === filterByContinent);
+    setFilterToCardsGrid(result);
+  }, [filterByContinent]);
 
   //name filter
   useEffect(() => {
     const filteredData = jsonData.filter((e) => {
-      return e.name.common.toLowerCase().includes(inputText);
+      return e.name.common.toLowerCase().includes(inputTextToFilter);
     });
-    setContFilter(filteredData);
-  }, [inputText]);
+    setFilterToCardsGrid(filteredData);
+  }, [inputTextToFilter]);
 
-  const button =(e) => {
-    // setDetail(null); // kiedy zmienia sie detail odpala sie filter z setDetail/ sposób na celearowanie state bez odpalania useEffect ?
-    setDetailView((wasOpened) => !wasOpened);
-
-  }
+  const button = (e) => {
+    // setnameToFilterToGetDataForDetailPage(null); // kiedy zmienia sie nameToFilterToGetDataForDetailPage odpala sie filter z setnameToFilterToGetDataForDetailPage/ sposób na celearowanie state bez odpalania useEffect ?
+    setDetailPageView((wasOpened) => !wasOpened);
+  };
 
   return (
     <>
       <div className="px-12 py-10 bg-gray-100 dark:bg-BackgroundDarkBlue">
-        {detailView ? (
+        {detailPageView ? (
           <>
             <div className="flex justify-between">
-              <FilterByName setInputText={setInputText} />
-              <FilterByContinent
-                setContinent={setContinent}
-                continent={continent}
-              />
+              <FilterByName setInputTextToFilter={setInputTextToFilter} />
+              <FilterByContinent setFilterByContinent={setFilterByContinent} />
             </div>
             <div className="cursor-pointer">
-              <CountriesCards data={contFilter} setDetail={setDetail} />
+              <CountriesCards
+                data={finalFilerToCardsGrid}
+                setnameToFilterToGetDataForDetailPage={
+                  setnameToFilterToGetDataForDetailPage
+                }
+              />
             </div>
           </>
         ) : (
           <>
-          <CountriesDetails data={detailCountry} />
-          <button onClick={button} style={{height:"20px", color:"white"}}>GETBACK </button>
+            <CountriesDetails data={dataForDetailPage} jsonData={jsonData}/>
+            <button onClick={button} style={{ height: "20px", color: "white" }}>
+              GETBACK{" "}
+            </button>
           </>
         )}
       </div>

@@ -1,7 +1,7 @@
-const CountriesCard = ({ data, setDetail }) => {
+const CountriesCard = ({ data, setnameToFilterToGetDataForDetailPage }) => {
   const handleDetailsClick = (e) => {
     const a = e.currentTarget.dataset.id;
-    setDetail(a);
+    setnameToFilterToGetDataForDetailPage(a);
   };
 
   return (
@@ -12,20 +12,33 @@ const CountriesCard = ({ data, setDetail }) => {
             onClick={(e) => handleDetailsClick(e)}
             key={e.name.common}
             data-id={e.name.common}
-            className="my-8 duration-300 bg-white rounded shadow-lg shadow-gray-200 dark:shadow-gray-900 dark:bg-gray-800 hover:-translate-y-1"
+            className="my-8 duration-300 rounded shadow-xl bg-White dark:bg-DarkBlue dark:text-White hover:-translate-y-1"
           >
             <img
-              className="object-cover w-full rounded-t h-72"
+              // className="object-cover w-full rounded-t h-72"
+              className="object-cover object-center w-full h-3/6 "
               alt="flag"
               src={e.flags.png}
             ></img>
-            <div className="mb-4 text-lg font-bold leading-relaxed text-gray-800 dark:text-gray-300">
-              <h2>{Object.values(e.name)[0]}</h2>
-            </div>
-            <div className="leading-5 text-gray-500 dark:text-gray-400">
-              <div className="population">Population:{e.population}</div>
-              <div className="region">Region:{e.region}</div>
-              <div className="capital">Capital:{e.capital}</div>
+            <div className="p-6">
+              <div className="mb-4 text-lg font-bold leading-relaxed ">
+                {/* <h2>{Object.values(e.name)[0]}</h2> */}
+                <h2>{e.name.common}</h2>
+              </div>
+              <div className="leading-5">
+                <div className="population">
+                  <span className="font-semibold">Population:</span>
+                  <span className="ml-1 font-light">{e.population}</span>
+                </div>
+                <div className="region">
+                  <span className="font-semibold">Region:</span>
+                  <span className="ml-1 font-light">{e.region}</span>
+                </div>
+                <div className="capital">
+                  <span className="font-semibold">Capital:</span>
+                  <span className="ml-1 font-light">{e.capital}</span>
+                </div>
+              </div>
             </div>
           </div>
         ))}

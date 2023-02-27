@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { ReactComponent as SunDarkMode } from "../icons/sun.svg";
+import { ReactComponent as MoonDarkMode } from "../icons/moon.svg";
 
 function DarkMode() {
   const [theme, setTheme] = useState(null);
 
-  //check default theme for browser
+  //check default theme from user browser
   useEffect(() => {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       setTheme("dark");
@@ -11,7 +13,7 @@ function DarkMode() {
       setTheme("light");
     }
   }, []);
-  // add class dark at top
+  // add class dark at the "top"
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
@@ -26,12 +28,22 @@ function DarkMode() {
 
   return (
     <div>
-      <button
-        className="bg-green-100 dark:bg-white p-2 rounded-3xl "
+      <div
+        className="flex flex-row cursor-pointer dark:text-White text-VeryDarkBlue"
         onClick={handleThemeSwitch}
       >
-        Dark Mode
-      </button>
+        {theme === "light" ? (
+          <>
+            <MoonDarkMode />
+            <h1>Dark Mode</h1>
+          </>
+        ) : (
+          <>
+            <SunDarkMode />
+            <h1>Light Mode</h1>
+          </>
+        )}
+      </div>
     </div>
   );
 }

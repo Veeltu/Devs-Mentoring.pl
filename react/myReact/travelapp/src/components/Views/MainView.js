@@ -3,7 +3,7 @@ import UpperTab from "../features/UpperTab/UpperTab";
 
 function MainView() {
   return (
-    <div className="">
+    <div className="bg-VeryLightGray">
       <UpperTab /> 
       <CountriesGrid/> 
     </div>

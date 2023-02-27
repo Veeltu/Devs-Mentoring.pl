@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-function FilterByContinent({ setContinent }) {
+function FilterByContinent({  setFilterByContinent }) {
   //list of cont. for filter
   const [continents, allContinents] = useState([
     "All",
@@ -14,8 +14,8 @@ function FilterByContinent({ setContinent }) {
   return (
     <div>
       <select
-        onChange={(e) => setContinent(e.target.value)}
-        className=" block bg-white w-full max-w-sm border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+        onChange={(e) =>  setFilterByContinent(e.target.value)}
+        className="block w-full max-w-sm py-2 pr-3 border-none rounded-md shadow-xl bg-White border-slate-300 pl-9 sm:text-sm"
       >
         {continents.map((e) => (
           <option key={e} value={e}>
