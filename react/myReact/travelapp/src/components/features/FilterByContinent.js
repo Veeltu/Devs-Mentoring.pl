@@ -1,15 +1,14 @@
 import React from "react";
-import { useState } from "react";
 
 function FilterByContinent({  setFilterByContinent }) {
   //list of cont. for filter
-  const [continents, allContinents] = useState([
+  const continents = [
     "All",
     "Asia",
     "Americas",
     "Africa",
     "Europe",
-  ]);
+  ];
 
   return (
     <div>

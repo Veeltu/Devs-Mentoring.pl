@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { ReactComponent as SunDarkMode } from "../icons/sun.svg";
-import { ReactComponent as MoonDarkMode } from "../icons/moon.svg";
+import { ReactComponent as SunDarkMode } from "./icons/sun.svg";
+import { ReactComponent as MoonDarkMode } from "./icons/moon.svg";
 
 function DarkMode() {
   const [theme, setTheme] = useState(null);
@@ -29,7 +29,7 @@ function DarkMode() {
   return (
     <div>
       <div
-        className="flex flex-row cursor-pointer dark:text-White text-VeryDarkBlue"
+        className="flex cursor-pointer dark:text-White text-VeryDarkBlue"
         onClick={handleThemeSwitch}
       >
         {theme === "light" ? (

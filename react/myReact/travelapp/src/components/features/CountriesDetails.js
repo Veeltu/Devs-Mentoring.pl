@@ -2,24 +2,20 @@ import React from "react";
 
 function CountriesDetails({ data, jsonData }) {
   console.log(data);
-
-  // jeżeli e(cca3) === cca3 to name.common - pętla 
-
-  const bordersCountrysCca3 = data.map((e) =>
-    <ul>{e}</ul>
-  )
-  
-
+  // borders country buttons ?
+  // jeżeli data.cca3 === cca3 to name.common - pętla
+  // useMemo
+  const bordersCountrysCca3 = data.map((e) => <ul>{e}</ul>);
 
   return (
-    <main className="w-[90%] max-w-md lg:max-w-6xl mx-auto capitalize py-14 relative">
+    <main className="w-[80%] max-w-md lg:max-w-6xl mx-auto capitalize py-14 relative">
       <button
         className="bg-White dark:bg-DarkBlue p-[.3em] px-[1.2em] rounded-sm mb-9 flex gap-2 
     items-center text-sm drop-shadow-md "
       >
         GET BACK
       </button>
-      <div className="grid justify-center mx-auto lg:gap-5 dark:text-White lg:grid-cols-2 lg:justify-between lg:text-left ">
+      <div className="justify-center mx-auto dark:text-White ">
         {data.map((e) => (
           <div
             key={e.name.common}
@@ -37,39 +33,51 @@ function CountriesDetails({ data, jsonData }) {
               </div>
               <div className="mb-5 column1 lg:mb-0 ">
                 <div className="nativname">
-                  Native Name:{" "}
+                  <span className="font-semibold">Native Name: </span>
                   {e.name.nativeName[Object.keys(e.name.nativeName)[0]].common}
                 </div>
-                <div className="population">Population:{e.population}</div>
-                <div className="region">Region:{e.region}</div>
-                <div className="subregion">Sub Region:{e.subregion}</div>
-                <div className="capital">Capital:{e.capital}</div>
+                <div className="population">
+                  <span className="font-semibold"> Population:</span>{" "}
+                  {e.population}
+                </div>
+                <div className="region">
+                  <span className="font-semibold"> Region:</span> {e.region}
+                </div>
+                <div className="subregion">
+                  <span className="font-semibold"> Sub Region: </span>
+                  {e.subregion}
+                </div>
+                <div className="capital">
+                  <span className="font-semibold"> Capital: </span>
+                  {e.capital}
+                </div>
               </div>
               <div className="column2 ">
                 <div className="topLevelDomain">
-                  Top Level Domain: {e.tld ? e.tld[0] : "none"}
+                  <span className="font-semibold">Top Level Domain: </span>
+                  {e.tld ? e.tld[0] : "none"}
                 </div>
                 <div className="curencies">
-                  Curencies:{" "}
+                  <span className="font-semibold">Curencies: </span>
                   {e.currencies
                     ? e.currencies[Object.keys(e.currencies)[0]].name
                     : []}
                 </div>
                 <div className="languages">
-                  Languages:{" "}
+                  <span className="font-semibold">Languages: </span>
                   {e.languages ? Object.values(e.languages).join(", ") : ""}
                 </div>
               </div>
-            </div>
-            <div className="flex flex-row borders ">
-              Border countries:{" "}
+            <div className="flex flex-row my-10 borders">
+              <span className="font-semibold"> Border countries: </span>
               {e.borders
                 ? e.borders.map((e) => (
                     <ul className="cursor-pointer bg-White dark:bg-DarkBlue p-[.3em] px-[1.3em] m-4 rounded-sm drop-shadow-lg ">
                       {e}
                     </ul>
                   ))
-                : []}
+                : [ "none"]}
+            </div>
             </div>
           </div>
         ))}
@@ -79,6 +87,3 @@ function CountriesDetails({ data, jsonData }) {
 }
 
 export default CountriesDetails;
-
-
-

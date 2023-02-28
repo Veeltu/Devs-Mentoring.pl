@@ -1,7 +1,7 @@
-const CountriesCard = ({ data, setnameToFilterToGetDataForDetailPage }) => {
+const CountriesCard = ({ data, setNameFilter }) => {
   const handleDetailsClick = (e) => {
     const a = e.currentTarget.dataset.id;
-    setnameToFilterToGetDataForDetailPage(a);
+    setNameFilter(a);
   };
 
   return (
@@ -15,14 +15,12 @@ const CountriesCard = ({ data, setnameToFilterToGetDataForDetailPage }) => {
             className="my-8 duration-300 rounded shadow-xl bg-White dark:bg-DarkBlue dark:text-White hover:-translate-y-1"
           >
             <img
-              // className="object-cover w-full rounded-t h-72"
               className="object-cover object-center w-full h-3/6 "
               alt="flag"
               src={e.flags.png}
             ></img>
             <div className="p-6">
               <div className="mb-4 text-lg font-bold leading-relaxed ">
-                {/* <h2>{Object.values(e.name)[0]}</h2> */}
                 <h2>{e.name.common}</h2>
               </div>
               <div className="leading-5">

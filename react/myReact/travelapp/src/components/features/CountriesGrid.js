@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import CountriesCards from "../CountriesCards/CountreisCards";
-import FilterByName from "../FilterByName/FilterByName";
-import FilterByContinent from "../FilterByContinent/FilterByContinent";
-import CountriesDetails from "../CountriesDetails/CountriesDetails";
+import CountriesCards from "./CountreisCards";
+import FilterByName from "./FilterByName";
+import FilterByContinent from "./FilterByContinent";
+import CountriesDetails from "./CountriesDetails";
 
 const url = "https://restcountries.com/v3.1/";
 
@@ -13,10 +13,8 @@ function CountriesGrid() {
   const [inputTextToFilter, setInputTextToFilter] = useState("");
   const [finalFilerToCardsGrid, setFilterToCardsGrid] = useState([]);
 
-  const [
-    nameToFilterToGetDataForDetailPage,
-    setnameToFilterToGetDataForDetailPage,
-  ] = useState();
+  // This value stores data from filter name for detail page
+  const [nameFilter, setNameFilter] = useState();
 
   const [dataForDetailPage, setDataForDetailPage] = useState([]);
   const [detailPageView, setDetailPageView] = useState(false);
@@ -35,16 +33,15 @@ function CountriesGrid() {
     getData();
   }, []);
 
-  //filter for one country match with "nameToFilterToGetDataForDetailPage"
+  //filter for one country match with "nameFilter"
   useEffect(() => {
     let detailData = []; // starts empty
-    if (nameToFilterToGetDataForDetailPage !== [])
-      detailData = jsonData.filter(
-        (e) => e.name.common === nameToFilterToGetDataForDetailPage
-      );
+    if (nameFilter !== [])
+      // ???
+      detailData = jsonData.filter((e) => e.name.common === nameFilter);
     setDataForDetailPage(detailData);
     setDetailPageView((wasOpened) => !wasOpened);
-  }, [nameToFilterToGetDataForDetailPage]);
+  }, [nameFilter]);
 
   //filterByContinent
   useEffect(() => {
@@ -63,7 +60,7 @@ function CountriesGrid() {
   }, [inputTextToFilter]);
 
   const button = (e) => {
-    // setnameToFilterToGetDataForDetailPage(null); // kiedy zmienia sie nameToFilterToGetDataForDetailPage odpala sie filter z setnameToFilterToGetDataForDetailPage/ sposób na celearowanie state bez odpalania useEffect ?
+    // setNameFilter(null); // kiedy zmienia sie nameFilter odpala sie filter z setNameFilter/ sposób na celearowanie state bez odpalania useEffect ?
     setDetailPageView((wasOpened) => !wasOpened);
   };
 
@@ -79,15 +76,13 @@ function CountriesGrid() {
             <div className="cursor-pointer">
               <CountriesCards
                 data={finalFilerToCardsGrid}
-                setnameToFilterToGetDataForDetailPage={
-                  setnameToFilterToGetDataForDetailPage
-                }
+                setNameFilter={setNameFilter}
               />
             </div>
           </>
         ) : (
           <>
-            <CountriesDetails data={dataForDetailPage} jsonData={jsonData}/>
+            <CountriesDetails data={dataForDetailPage} jsonData={jsonData} />
             <button onClick={button} style={{ height: "20px", color: "white" }}>
               GETBACK{" "}
             </button>

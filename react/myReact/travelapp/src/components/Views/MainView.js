@@ -1,5 +1,5 @@
-import CountriesGrid from "../features/CountriesGrid/CountriesGrid";
-import UpperTab from "../features/UpperTab/UpperTab";
+import CountriesGrid from "../features/CountriesGrid";
+import UpperTab from "../features/UpperTab";
 
 function MainView() {
   return (
