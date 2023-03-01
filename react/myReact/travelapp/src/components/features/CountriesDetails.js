@@ -1,11 +1,16 @@
 import React from "react";
 
 function CountriesDetails({ data, jsonData }) {
-  console.log(data);
+  // console.log(data);
   // borders country buttons ?
-  // jeżeli data.cca3 === cca3 to name.common - pętla
   // useMemo
-  const bordersCountrysCca3 = data.map((e) => <ul>{e}</ul>);
+ 
+    const bordersCoutries = data.map((e) => e.borders);
+    const some = jsonData.filter(item => bordersCoutries[0].includes(item.cca3))
+    
+
+
+
 
   return (
     <main className="w-[80%] max-w-md lg:max-w-6xl mx-auto capitalize py-14 relative">
@@ -68,16 +73,16 @@ function CountriesDetails({ data, jsonData }) {
                   {e.languages ? Object.values(e.languages).join(", ") : ""}
                 </div>
               </div>
-            <div className="flex flex-row my-10 borders">
-              <span className="font-semibold"> Border countries: </span>
-              {e.borders
-                ? e.borders.map((e) => (
-                    <ul className="cursor-pointer bg-White dark:bg-DarkBlue p-[.3em] px-[1.3em] m-4 rounded-sm drop-shadow-lg ">
-                      {e}
-                    </ul>
-                  ))
-                : [ "none"]}
-            </div>
+              <div className="flex flex-row my-10 borders">
+                <span className="font-semibold"> Border countries: </span>
+                {e.borders
+                  ? e.borders.map((e) => (
+                      <ul className="cursor-pointer bg-White dark:bg-DarkBlue p-[.3em] px-[1.3em] m-4 rounded-sm drop-shadow-lg ">
+                        {e}
+                      </ul>
+                    ))
+                  : ["none"]}
+              </div>
             </div>
           </div>
         ))}
